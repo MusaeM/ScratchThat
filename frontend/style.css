@@ -6,26 +6,22 @@ body {
     padding: 0;
 }
 
-/* Container */
 .container {
     background: #ffffff;
     padding: 25px 20px;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
+    width: 90%;        /* ALLTID 90% av skärmen */
     margin: 40px auto;
     text-align: center;
 }
 
-/* Rubrik */
 h1 {
     color: #333;
     font-size: 24px;
     margin-bottom: 25px;
 }
 
-/* Inputs */
 input[type="text"],
 input[type="email"] {
     width: 100%;
@@ -37,7 +33,6 @@ input[type="email"] {
     box-sizing: border-box;
 }
 
-/* Checkboxar */
 .checkboxes {
     text-align: left;
     margin-bottom: 20px;
@@ -50,7 +45,6 @@ label {
     color: #555;
 }
 
-/* Skicka-knappen */
 button {
     width: 100%;
     background-color: #007bff;
@@ -74,24 +68,4 @@ button:hover {
     font-size: 18px;
     margin-top: 20px;
     color: #333;
-}
-
-/* MOBIL */
-@media (max-width: 450px) {
-    .container {
-        width: 90%;     /* Använd 90% av mobilens skärm */
-        max-width: none; /* Ta bort max-width så den inte blir instängd */
-        margin: 20px auto;
-        padding: 20px 15px;
-    }
-
-    h1 {
-        font-size: 22px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    button {
-        font-size: 16px;
-    }
 }
