@@ -3,41 +3,40 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    padding-top: 60px; /* Luft upptill */
+    padding: 0;
 }
 
+/* Container */
 .container {
     background: #ffffff;
-    padding: 30px 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    width: 100%;
-    max-width: 400px; /* Exakt samma stil som cardrop */
+    padding: 20px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 95%;        /* Fyll mer av mobilskärmen! */
+    margin: 20px auto;
     text-align: center;
 }
 
+/* Rubrik */
 h1 {
-    color: #222;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 25px;
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 
+/* Inputs */
 input[type="text"],
 input[type="email"] {
     width: 100%;
-    padding: 14px 16px;
-    margin-bottom: 16px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     font-size: 16px;
     box-sizing: border-box;
-    background-color: #fff;
 }
 
+/* Checkboxar */
 .checkboxes {
     text-align: left;
     margin-bottom: 20px;
@@ -45,20 +44,21 @@ input[type="email"] {
 
 label {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-size: 16px;
     color: #555;
 }
 
+/* Skicka-knappen */
 button {
     width: 100%;
     background-color: #007bff;
     color: white;
     padding: 14px;
-    margin-top: 15px;
+    margin-top: 10px;
     border: none;
-    border-radius: 8px;
-    font-size: 17px;
+    border-radius: 6px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -73,13 +73,4 @@ button:hover {
     font-size: 18px;
     margin-top: 20px;
     color: #333;
-}
-
-/* Mobilfix */
-@media (max-width: 500px) {
-    .container {
-        margin: 20px;
-        padding: 25px 20px;
-        max-width: 90%;
-    }
 }
