@@ -34,8 +34,8 @@ app.post('/send-email', async (req, res) => {
   	mrkoll: 'info@mrkoll.se',
 	ratsit: 'kundservice@ratsit.se',
 	upplysning: 'support@upplysning.se'*/
-mrkoll: 'ceweriyezdan@gmail.com',
-birthday: 'ceweriyezdan@gmail.com'
+mrkoll: 'marouf.musae@gmail.com',
+birthday: 'marouf.musae@gmail.com'
       // Lägg till fler sajter här
     };
 
