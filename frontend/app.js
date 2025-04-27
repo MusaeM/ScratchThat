@@ -1,13 +1,27 @@
+// "Välj alla" funktion
+const selectAll = document.getElementById('selectAll');
+const checkboxes = document.querySelectorAll('input[name="companies"]');
+
+selectAll.addEventListener('change', function () {
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+// Form och element
 const form = document.getElementById('gdprForm');
 const loading = document.getElementById('loading');
 const thankYou = document.getElementById('thankYou');
-const submitBtn = document.getElementById('submitBtn');
+const submitButton = document.getElementById('submitButton');
+const buttonText = document.getElementById('buttonText');
+const spinner = document.getElementById('spinner');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    submitBtn.style.display = 'none';
-    loading.style.display = 'block';
+    // Visa spinner och ändra knapp
+    buttonText.textContent = 'Skickar...';
+    spinner.style.display = 'inline-block';
 
     const name = document.getElementById('name').value;
     const pnr = document.getElementById('pnr').value;
@@ -27,12 +41,17 @@ form.addEventListener('submit', async (e) => {
 
         const result = await response.json();
 
+        // Lyckades: visa Tack och nollställ
+        spinner.style.display = 'none';
+        buttonText.textContent = 'Skicka GDPR Begäran';
         loading.style.display = 'none';
+        form.style.display = 'none';
         thankYou.style.display = 'block';
         form.reset();
     } catch (error) {
         console.error('Error:', error);
+        spinner.style.display = 'none';
+        buttonText.textContent = 'Skicka GDPR Begäran';
         loading.innerText = 'Något gick fel, försök igen. ❌';
     }
 });
-

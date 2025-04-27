@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Flat_tick_icon.svg" alt="ScratchThat Logo" class="logo">
         <h1>ScratchThat</h1>
 
         <form id="gdprForm">
@@ -15,43 +16,31 @@
             <input type="text" id="pnr" placeholder="Personnummer" required>
             <input type="email" id="email" placeholder="E-post" required>
 
-<div class="checkboxes">
-    <label><input type="checkbox" name="companies" value="180"> 180.se</label>
-    <label><input type="checkbox" name="companies" value="birthday"> Birthday.se</label>
-    <label><input type="checkbox" name="companies" value="eniro"> Eniro.se</label>
-    <label><input type="checkbox" name="companies" value="hitta"> Hitta.se</label>
-    <label><input type="checkbox" name="companies" value="merinfo"> Merinfo.se</label>
-    <label><input type="checkbox" name="companies" value="mrkoll"> Mrkoll.se</label>
-    <label><input type="checkbox" name="companies" value="ratsit"> Ratsit.se</label>
-    <label><input type="checkbox" name="companies" value="upplysning"> Upplysning.se</label>
-</div>
+            <div class="checkboxes">
+                <label><input type="checkbox" name="companies" value="180"> 180.se</label>
+                <label><input type="checkbox" name="companies" value="birthday"> Birthday.se</label>
+                <label><input type="checkbox" name="companies" value="eniro"> Eniro.se</label>
+                <label><input type="checkbox" name="companies" value="hitta"> Hitta.se</label>
+                <label><input type="checkbox" name="companies" value="merinfo"> Merinfo.se</label>
+                <label><input type="checkbox" name="companies" value="mrkoll"> Mrkoll.se</label>
+                <label><input type="checkbox" name="companies" value="ratsit"> Ratsit.se</label>
+                <label><input type="checkbox" name="companies" value="upplysning"> Upplysning.se</label>
+            </div>
 
-		<!-- Select All checkbox -->
-		<div class="select-all">
-			<label><input type="checkbox" id="selectAll"> Välj alla</label>
-		</div>
+            <div class="select-all">
+                <label><input type="checkbox" id="selectAll"> Välj alla</label>
+            </div>
 
-            <button type="submit" id="submitBtn">Skicka GDPR Begäran</button>
+            <button type="submit" id="submitButton">
+                <span id="buttonText">Skicka GDPR Begäran</span>
+                <div id="spinner" style="display: none;"></div>
+            </button>
         </form>
-		
 
         <div id="loading" style="display: none;">Skickar... 🔄</div>
         <div id="thankYou" style="display: none;">Tack! Ditt ärende är inskickat. 📬</div>
     </div>
 
     <script src="app.js"></script>
-	
-	<script>
-    const selectAll = document.getElementById('selectAll');
-    const checkboxes = document.querySelectorAll('input[name="companies"]');
-
-    selectAll.addEventListener('change', function() {
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = this.checked;
-        });
-    });
-</script>
-
-		
 </body>
 </html>
