@@ -1,65 +1,100 @@
+/* Bas för hela sidan */
 body {
     background-color: #f9f9f9;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 10px; /* Mindre padding på mobiler */
 }
 
+/* Formulärcontainer */
 .container {
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    width: 90%;
-    max-width: 450px;
+    background: #ffffff;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
     text-align: center;
 }
 
+/* Rubrik */
 h1 {
     color: #333;
+    font-size: 24px;
     margin-bottom: 20px;
 }
 
-input[type="text"], input[type="email"] {
+/* Inputs för text och email */
+input[type="text"],
+input[type="email"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 14px;
+    margin-bottom: 16px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 8px;
+    font-size: 16px;
     box-sizing: border-box;
 }
 
-button {
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    padding: 14px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
+/* Checkbox-sektionen */
 .checkboxes {
     text-align: left;
     margin-bottom: 20px;
 }
 
+/* Checkbox-etiketter */
 label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
+    margin-bottom: 12px;
+    font-size: 16px;
     color: #555;
 }
 
-#loading, #thankYou {
+/* Skicka-knappen */
+button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover-effekt på knappen */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Loading och Tack-meddelande */
+#loading,
+#thankYou {
     font-size: 18px;
     margin-top: 20px;
+    color: #333;
+}
+
+/* Extra mobiljusteringar */
+@media (max-width: 500px) {
+    .container {
+        padding: 20px 15px; /* Mindre padding på små skärmar */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    button {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
 }
