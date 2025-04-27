@@ -62,7 +62,7 @@ form.addEventListener('submit', async (e) => {
     const data = { name, pnr, email, companies };
 
     try {
-        const response = await fetch('https://scratch-that-frqqm2vop-musaems-projects.vercel.app/send-email', {
+        const response = await fetch('https://scratch-that-f9adnh625-musaems-projects.vercel.app/send-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
