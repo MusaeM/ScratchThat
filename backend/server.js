@@ -24,28 +24,47 @@ app.post('/send-email', async (req, res) => {
     });
 
     const targets = {
-      mrkoll: 'ceweriyezdan@gmail.com',
-      birthday: 'ceweriyezdan@gmail.com',
+	/*180: 'support@180.se',
+  	birthday: 'info@birthday.se',
+	eniro: 'dataskydd@eniro.com',
+  	hitta: 'personuppgifter@hitta.se',
+  	merinfo: 'info@merinfo.se',
+  	mrkoll: 'info@mrkoll.se',
+	ratsit: 'kundservice@ratsit.se',
+	upplysning: 'support@upplysning.se'*/
+mrkoll: 'ceweriyezdan@gmail.com',
+birthday: 'ceweriyezdan@gmail.com'
       // Lägg till fler sajter här
     };
 
-    for (const company of companies) {
-      const mailOptions = {
-        from: process.env.SMTP_USER,
-        to: targets[company],
-        subject: 'Begäran om radering av personuppgifter enligt GDPR',
-        text: `Hej,
+for (const company of companies) {
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: targets[company],
+    subject: 'Begäran om radering av personuppgifter enligt GDPR (Artikel 17)',
+    text: `Hej,
 
-Jag, ${name}, personnummer ${pnr}, begär härmed att mina personuppgifter raderas från er tjänst enligt min rätt enligt GDPR (artikel 17).
+Jag, ${name}, personnummer ${pnr}, begär härmed i enlighet med Artikel 17 i Dataskyddsförordningen (GDPR) att alla personuppgifter som rör mig raderas från era system, register och eventuella samarbetspartners.
 
-Kontakt: ${email}
+Jag önskar få bekräftelse på radering samt information om behandlade uppgifter, enligt Artikel 12.3 GDPR, inom en månad.
 
-Tack på förhand,
-${name}`
-      };
+Återkoppla till: ${email}
 
-      await transporter.sendMail(mailOptions);
-    }
+Vänliga hälsningar,
+${name}`,
+    html: `
+    <p>Hej,</p>
+    <p>Jag, <strong>${name}</strong>, personnummer <strong>${pnr}</strong>, begär härmed i enlighet med <strong>Artikel 17</strong> i Dataskyddsförordningen (GDPR) att alla personuppgifter som rör mig raderas från era system, register och eventuella samarbetspartners.</p>
+    <p>Jag önskar få bekräftelse på radering samt information om behandlade uppgifter, enligt <strong>Artikel 12.3 GDPR</strong>, inom en månad.</p>
+    <p>För eventuell återkoppling kan ni nå mig på: <a href="mailto:${email}">${email}</a></p>
+    <p>Vänliga hälsningar,<br>${name}</p>
+    `
+  };
+
+  await transporter.sendMail(mailOptions);
+}
+
+
 
     res.status(200).json({ message: 'Mails sent successfully' });
   } catch (error) {
