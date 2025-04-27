@@ -1,14 +1,12 @@
 body {
     background-color: #f9f9f9;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     margin: 0;
     padding: 0;
 }
 
+/* Container */
 .container {
     background: #ffffff;
     padding: 25px 20px;
@@ -16,15 +14,18 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     width: 90%;
     max-width: 400px;
+    margin: auto; /* Centrera på desktop */
     text-align: center;
 }
 
+/* Rubrik */
 h1 {
     color: #333;
     font-size: 24px;
     margin-bottom: 25px;
 }
 
+/* Inputs */
 input[type="text"],
 input[type="email"] {
     width: 100%;
@@ -36,6 +37,7 @@ input[type="email"] {
     box-sizing: border-box;
 }
 
+/* Checkboxar */
 .checkboxes {
     text-align: left;
     margin-bottom: 20px;
@@ -48,6 +50,7 @@ label {
     color: #555;
 }
 
+/* Skicka-knapp */
 button {
     width: 100%;
     background-color: #007bff;
@@ -66,6 +69,7 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Loading och Tack-meddelande */
 #loading,
 #thankYou {
     font-size: 18px;
@@ -73,11 +77,16 @@ button:hover {
     color: #333;
 }
 
-/* MOBIL */
+/* ✅ Endast för mobil */
 @media (max-width: 500px) {
+    body {
+        padding-top: 20px; /* Lägg till lite padding upptill på body */
+    }
+
     .container {
+        margin-top: 10px; /* Flytta formuläret uppåt på mobil */
         width: 90%;
-        max-width: 350px;
+        max-width: 350px; /* Gör det lite smalare på mobil */
         padding: 20px 15px;
     }
 
