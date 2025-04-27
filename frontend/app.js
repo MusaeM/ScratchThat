@@ -10,70 +10,78 @@ selectAll.addEventListener('change', function () {
 
 // Form och element
 const form = document.getElementById('gdprForm');
-const loading = document.getElementById('loading');
-const thankYou = document.getElementById('thankYou');
+const bankidButton = document.getElementById('bankidButton');
 const submitButton = document.getElementById('submitButton');
 const buttonText = document.getElementById('buttonText');
 const spinner = document.getElementById('spinner');
+const loading = document.getElementById('loading');
+const thankYou = document.getElementById('thankYou');
 const bankidModal = document.getElementById('bankidModal');
 const modalText = document.getElementById('modalText');
 
 let isVerified = false;
 
-submitButton.addEventListener('click', async (e) => {
-    e.preventDefault();
+// BankID verifiering
+bankidButton.addEventListener('click', () => {
+    bankidModal.style.display = 'block';
+    modalText.textContent = 'Öppnar BankID...';
 
-    if (!isVerified) {
-        // Starta BankID-process
-        bankidModal.style.display = 'block';
-        modalText.textContent = 'Öppnar BankID...';
+    // Starta om progressBar varje gång
+    const progressBar = document.getElementById('progressBar');
+    progressBar.style.width = '0%';
+    progressBar.style.animation = 'loadProgress 4s linear forwards';
+
+    setTimeout(() => {
+        isVerified = true;
+        modalText.textContent = 'Verifiering lyckades ✅';
 
         setTimeout(() => {
-            // Simulerad verifiering klar
-            isVerified = true;
-            modalText.textContent = 'Verifiering lyckades ✅';
+            bankidModal.style.display = 'none';
+            submitButton.disabled = false;
+            bankidButton.disabled = true;
+            bankidButton.innerHTML = 'Verifierad ✔️';
+            bankidButton.style.backgroundColor = '#28a745';
+            bankidButton.style.cursor = 'default';
+        }, 1500);
+    }, 4000);
+});
 
-            setTimeout(() => {
-                bankidModal.style.display = 'none';
-                buttonText.textContent = 'Skicka GDPR Begäran';
-                form.style.display = 'block';
-            }, 1500);
-        }, 4000);
-    } else {
-        // Skicka formuläret
-        buttonText.textContent = 'Skickar...';
-        spinner.style.display = 'inline-block';
 
-        const name = document.getElementById('name').value;
-        const pnr = document.getElementById('pnr').value;
-        const email = document.getElementById('email').value;
-        const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map(el => el.value);
+// Formulärsubmit
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        const data = { name, pnr, email, companies };
+    buttonText.textContent = 'Skickar...';
+    spinner.style.display = 'inline-block';
 
-        try {
-            const response = await fetch('https://scratch-that-5rj639992-musaems-projects.vercel.app/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+    const name = document.getElementById('name').value;
+    const pnr = document.getElementById('pnr').value;
+    const email = document.getElementById('email').value;
+    const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map(el => el.value);
 
-            const result = await response.json();
+    const data = { name, pnr, email, companies };
 
-            spinner.style.display = 'none';
-            buttonText.textContent = 'Skicka GDPR Begäran';
-            loading.style.display = 'none';
-            form.style.display = 'none';
-            thankYou.style.display = 'block';
-            form.reset();
-            isVerified = false;
-        } catch (error) {
-            console.error('Error:', error);
-            spinner.style.display = 'none';
-            buttonText.textContent = 'Skicka GDPR Begäran';
-            loading.innerText = 'Något gick fel, försök igen. ❌';
-        }
+    try {
+        const response = await fetch('https://scratch-that-5rj639992-musaems-projects.vercel.app/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        spinner.style.display = 'none';
+        buttonText.textContent = 'Skicka GDPR Begäran';
+        loading.style.display = 'none';
+        form.style.display = 'none';
+        thankYou.style.display = 'block';
+        isVerified = false;
+    } catch (error) {
+        console.error('Error:', error);
+        spinner.style.display = 'none';
+        buttonText.textContent = 'Skicka GDPR Begäran';
+        loading.innerText = 'Något gick fel, försök igen. ❌';
     }
 });

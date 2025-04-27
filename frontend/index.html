@@ -10,7 +10,7 @@
     <div class="container">
         <img src="ScratchThat.png" alt="ScratchThat Logo" class="logo">
 
-        <form id="gdprForm" style="display: none;">
+        <form id="gdprForm">
             <input type="text" id="name" placeholder="Namn" required>
             <input type="text" id="pnr" placeholder="Personnummer" required>
             <input type="email" id="email" placeholder="E-post" required>
@@ -30,8 +30,12 @@
                 <label><input type="checkbox" id="selectAll"> Välj alla</label>
             </div>
 
-            <button type="submit" id="submitButton">
-                <span id="buttonText">Verifiera med BankID</span>
+            <!-- Verifiera med BankID-knapp -->
+            <button type="button" id="bankidButton">Verifiera med BankID</button>
+
+            <!-- Skicka GDPR-begäran-knapp -->
+            <button type="submit" id="submitButton" disabled>
+                <span id="buttonText">Skicka GDPR Begäran</span>
                 <div id="spinner" style="display: none;"></div>
             </button>
         </form>
@@ -43,6 +47,9 @@
         <div id="bankidModal" class="modal">
             <div class="modal-content">
                 <div class="spinner-modal"></div>
+				<div class="progress-container">
+					<div id="progressBar"></div>
+				</div>
                 <p id="modalText">Öppnar BankID...</p>
             </div>
         </div>

@@ -183,3 +183,31 @@ form button:hover {
     100% { transform: rotate(360deg); }
 }
 
+#bankidButton:disabled {
+    background-color: #28a745;
+    color: white;
+    cursor: default;
+}
+
+/* Progress bar container */
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+/* Progress bar */
+#progressBar {
+    width: 0%;
+    height: 8px;
+    background-color: #0070ba;
+    animation: loadProgress 4s linear forwards;
+}
+
+/* Animation för progress */
+@keyframes loadProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
