@@ -12,9 +12,9 @@ body {
     padding: 25px 20px;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 90%;
-    max-width: 400px;
-    margin: auto; /* Centrera på desktop */
+    width: 100%;
+    max-width: 450px;
+    margin: 40px auto;
     text-align: center;
 }
 
@@ -50,7 +50,7 @@ label {
     color: #555;
 }
 
-/* Skicka-knapp */
+/* Skicka-knappen */
 button {
     width: 100%;
     background-color: #007bff;
@@ -69,7 +69,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Loading och Tack-meddelande */
 #loading,
 #thankYou {
     font-size: 18px;
@@ -77,26 +76,12 @@ button:hover {
     color: #333;
 }
 
-/* ✅ Endast för mobil */
-@media (max-width: 500px) {
-    body {
-        padding-top: 20px; /* Lägg till lite padding upptill på body */
-    }
-
+/* MOBIL */
+@media (max-width: 600px) {
     .container {
-        margin-top: 10px; /* Flytta formuläret uppåt på mobil */
         width: 90%;
-        max-width: 350px; /* Gör det lite smalare på mobil */
+        max-width: none; /* <==== Viktigt: INGEN max-width på mobil! */
+        margin: 20px auto;
         padding: 20px 15px;
-    }
-
-    h1 {
-        font-size: 22px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    button {
-        font-size: 16px;
     }
 }
