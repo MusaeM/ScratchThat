@@ -16,7 +16,7 @@ body {
     padding: 25px 20px;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 100%;
+    width: 95%; /* Bredd på mobil och desktop */
     max-width: 400px;
     text-align: center;
 }
