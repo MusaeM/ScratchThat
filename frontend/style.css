@@ -1,4 +1,3 @@
-/* Basinställningar */
 body {
     background-color: #f9f9f9;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -10,24 +9,22 @@ body {
     padding: 0;
 }
 
-/* Containern */
 .container {
     background: #ffffff;
     padding: 25px 20px;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 95%;
+    width: 90%;
+    max-width: 400px;
     text-align: center;
 }
 
-/* Rubrik */
 h1 {
     color: #333;
     font-size: 24px;
     margin-bottom: 25px;
 }
 
-/* Inputs */
 input[type="text"],
 input[type="email"] {
     width: 100%;
@@ -39,7 +36,6 @@ input[type="email"] {
     box-sizing: border-box;
 }
 
-/* Checkboxar och etiketter */
 .checkboxes {
     text-align: left;
     margin-bottom: 20px;
@@ -52,7 +48,6 @@ label {
     color: #555;
 }
 
-/* Skicka-knapp */
 button {
     width: 100%;
     background-color: #007bff;
@@ -67,12 +62,10 @@ button {
     transition: background-color 0.3s ease;
 }
 
-/* Hover-effekt */
 button:hover {
     background-color: #0056b3;
 }
 
-/* Loading och Tack-sida */
 #loading,
 #thankYou {
     font-size: 18px;
@@ -80,11 +73,11 @@ button:hover {
     color: #333;
 }
 
-/* Särskilt för mobiler */
+/* MOBIL */
 @media (max-width: 500px) {
     .container {
-        width: 95%;
-        max-width: none;
+        width: 90%;
+        max-width: 350px;
         padding: 20px 15px;
     }
 
