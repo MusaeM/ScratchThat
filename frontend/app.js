@@ -1,7 +1,13 @@
 const form = document.getElementById('gdprForm');
+const loading = document.getElementById('loading');
+const thankYou = document.getElementById('thankYou');
+const submitBtn = document.getElementById('submitBtn');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    submitBtn.style.display = 'none';
+    loading.style.display = 'block';
 
     const name = document.getElementById('name').value;
     const pnr = document.getElementById('pnr').value;
@@ -20,9 +26,13 @@ form.addEventListener('submit', async (e) => {
         });
 
         const result = await response.json();
-        alert(result.message);
+
+        loading.style.display = 'none';
+        thankYou.style.display = 'block';
+        form.reset();
     } catch (error) {
         console.error('Error:', error);
-        alert('Något gick fel.');
+        loading.innerText = 'Något gick fel, försök igen. ❌';
     }
 });
+
