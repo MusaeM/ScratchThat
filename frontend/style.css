@@ -1,76 +1,75 @@
-body {
-    background-color: #f9f9f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
+/* Återställ grundinställningar */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Container */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f7f7;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Formulärcontainer */
 .container {
     background: #ffffff;
-    padding: 20px 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 95%;        /* Fyll mer av mobilskärmen! */
-    margin: 20px auto;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
     text-align: center;
 }
 
 /* Rubrik */
 h1 {
+    margin-bottom: 25px;
+    font-size: 26px;
     color: #333;
-    font-size: 22px;
-    margin-bottom: 20px;
 }
 
 /* Inputs */
-input[type="text"],
-input[type="email"] {
+form input[type="text"],
+form input[type="password"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-/* Checkboxar */
-.checkboxes {
-    text-align: left;
+    padding: 15px;
     margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     font-size: 16px;
-    color: #555;
 }
 
-/* Skicka-knappen */
-button {
+/* Knapp */
+form button {
     width: 100%;
-    background-color: #007bff;
-    color: white;
-    padding: 14px;
-    margin-top: 10px;
+    padding: 15px;
+    background-color: #0070ba;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
+    color: white;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
+form button:hover {
+    background-color: #005ea6;
 }
 
-#loading,
-#thankYou {
-    font-size: 18px;
-    margin-top: 20px;
-    color: #333;
+/* Mobilanpassning */
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+        width: 90%;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
 }
