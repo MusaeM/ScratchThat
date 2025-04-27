@@ -8,9 +8,9 @@
 </head>
 <body>
     <div class="container">
-		<img src="ScratchThat.png" alt="ScratchThat Logo" class="logo">
+        <img src="ScratchThat.png" alt="ScratchThat Logo" class="logo">
 
-        <form id="gdprForm">
+        <form id="gdprForm" style="display: none;">
             <input type="text" id="name" placeholder="Namn" required>
             <input type="text" id="pnr" placeholder="Personnummer" required>
             <input type="email" id="email" placeholder="E-post" required>
@@ -31,13 +31,22 @@
             </div>
 
             <button type="submit" id="submitButton">
-                <span id="buttonText">Skicka GDPR Begäran</span>
+                <span id="buttonText">Verifiera med BankID</span>
                 <div id="spinner" style="display: none;"></div>
             </button>
         </form>
 
         <div id="loading" style="display: none;">Skickar... 🔄</div>
         <div id="thankYou" style="display: none;">Tack! Ditt ärende är inskickat. 📬</div>
+
+        <!-- Modal för BankID -->
+        <div id="bankidModal" class="modal">
+            <div class="modal-content">
+                <div class="spinner-modal"></div>
+                <p id="modalText">Öppnar BankID...</p>
+            </div>
+        </div>
+
     </div>
 
     <script src="app.js"></script>
