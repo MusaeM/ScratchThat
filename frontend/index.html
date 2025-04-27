@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <title>ScratchThat</title>
+    <meta charset="UTF-8">
+    <title>ScratchThat</title>
 </head>
 <body>
-  <h1>ScratchThat</h1>
+    <h1>ScratchThat</h1>
+    <form id="gdprForm">
+        <input type="text" id="name" placeholder="Namn" required><br><br>
+        <input type="text" id="pnr" placeholder="Personnummer" required><br><br>
+        <input type="email" id="email" placeholder="E-post" required><br><br>
 
-  <form id="gdpr-form">
-    Namn: <input type="text" id="name"><br>
-    Personnummer: <input type="text" id="pnr"><br>
-    E-post: <input type="email" id="email"><br><br>
+        <label><input type="checkbox" name="companies" value="mrkoll"> Mrkoll</label><br>
+        <label><input type="checkbox" name="companies" value="birthday"> Birthday</label><br><br>
 
-    <label><input type="checkbox" name="companies" value="mrkoll"> Mrkoll.se</label><br>
-    <label><input type="checkbox" name="companies" value="birthday"> Birthday.se</label><br><br>
+        <button type="submit">Skicka GDPR Begäran</button>
+    </form>
 
-    <button type="submit">Verifiera & Skicka GDPR-begäran</button>
-  </form>
-
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
