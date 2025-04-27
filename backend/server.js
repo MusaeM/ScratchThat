@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('ScratchThat Backend running 🚀');
+  res.send('ScratchThat Backend running  🚀');
 });
 
 app.post('/send-email', async (req, res) => {
