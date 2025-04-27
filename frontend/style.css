@@ -8,11 +8,12 @@
 /* Body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f7f7f7;
+    background-color: #f0f2f5;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 /* Formulärcontainer */
@@ -20,17 +21,18 @@ body {
     background: #ffffff;
     padding: 40px 30px;
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     text-align: center;
 }
 
 /* Rubrik */
 h1 {
     margin-bottom: 25px;
-    font-size: 26px;
-    color: #333;
+    font-size: 28px;
+    color: #202124;
+    font-weight: 600;
 }
 
 /* Inputs */
@@ -39,32 +41,27 @@ form input[type="email"] {
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #d0d0d0;
     border-radius: 8px;
     font-size: 16px;
+    background-color: #fafafa;
 }
 
 /* Checkbox sektion */
 .checkboxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
     margin-bottom: 20px;
+    text-align: left;
 }
 
-/* Par av checkboxar */
-.checkbox-pair {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-}
-
-.checkbox-pair label {
-    flex: 1;
-    margin-right: 10px;
-    font-size: 14px;
+.checkboxes label {
+    font-size: 15px;
     color: #333;
-}
-
-.checkbox-pair label:last-child {
-    margin-right: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Välj alla */
@@ -74,8 +71,11 @@ form input[type="email"] {
 }
 
 .select-all label {
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Knapp */
@@ -89,18 +89,19 @@ form button {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 form button:hover {
     background-color: #005ea6;
+    transform: translateY(-2px);
 }
 
 /* Mobilanpassning */
 @media (max-width: 600px) {
     .container {
         padding: 30px 20px;
-        width: 90%;
+        width: 95%;
         border-radius: 10px;
     }
 
@@ -108,12 +109,8 @@ form button:hover {
         font-size: 24px;
     }
 
-    .checkbox-pair {
-        flex-direction: row;
-    }
-
-    .checkbox-pair label {
-        margin-right: 0;
-        margin-bottom: 8px;
+    .checkboxes {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 16px;
     }
 }
