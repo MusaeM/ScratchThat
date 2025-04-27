@@ -15,13 +15,15 @@ app.post('/send-email', async (req, res) => {
   try {
     const { name, pnr, email, companies } = req.body;
 
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+	let transporter = nodemailer.createTransport({
+  host: 'smtp.zoho.eu',
+  port: 465, // Använd 465 för SSL eller 587 för TLS
+  secure: true, // true för port 465, annars false
+  auth: {
+    user: process.env.SMTP_USER, // ex. no-reply@scratchthat.se
+    pass: process.env.SMTP_PASS, // ditt lösenord
+  },
+});
 
     const targets = {
 	/*180: 'support@180.se',
