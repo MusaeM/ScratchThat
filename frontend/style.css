@@ -1,4 +1,4 @@
-/* Bas för hela sidan */
+/* Grundinställningar */
 body {
     background-color: #f9f9f9;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -7,10 +7,10 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    padding: 10px; /* Mindre padding på mobiler */
+    padding: 10px;
 }
 
-/* Formulärcontainer */
+/* Containern för formuläret */
 .container {
     background: #ffffff;
     padding: 25px 20px;
@@ -25,10 +25,10 @@ body {
 h1 {
     color: #333;
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-/* Inputs för text och email */
+/* Inputs (text, email) */
 input[type="text"],
 input[type="email"] {
     width: 100%;
@@ -40,13 +40,12 @@ input[type="email"] {
     box-sizing: border-box;
 }
 
-/* Checkbox-sektionen */
+/* Checkboxar och etiketter */
 .checkboxes {
     text-align: left;
     margin-bottom: 20px;
 }
 
-/* Checkbox-etiketter */
 label {
     display: block;
     margin-bottom: 12px;
@@ -54,7 +53,7 @@ label {
     color: #555;
 }
 
-/* Skicka-knappen */
+/* Skicka-knapp */
 button {
     width: 100%;
     background-color: #007bff;
@@ -82,19 +81,25 @@ button:hover {
     color: #333;
 }
 
-/* Extra mobiljusteringar */
+/* Mobilanpassning */
 @media (max-width: 500px) {
+    body {
+        padding: 0; /* Inget extra utrymme på sidorna */
+    }
+
     .container {
-        padding: 20px 15px; /* Mindre padding på små skärmar */
+        width: 95%;
+        max-width: none; /* Tillåter hela 95% av skärmen på mobil */
+        padding: 20px 15px; /* Lite mindre padding inuti */
+    }
+
+    h1 {
+        font-size: 22px;
     }
 
     input[type="text"],
     input[type="email"],
     button {
         font-size: 16px;
-    }
-
-    h1 {
-        font-size: 22px;
     }
 }
