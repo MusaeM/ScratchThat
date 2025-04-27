@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+/* Body */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f7f7f7;
@@ -34,13 +35,47 @@ h1 {
 
 /* Inputs */
 form input[type="text"],
-form input[type="password"] {
+form input[type="email"] {
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
+}
+
+/* Checkbox sektion */
+.checkboxes {
+    margin-bottom: 20px;
+}
+
+/* Par av checkboxar */
+.checkbox-pair {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.checkbox-pair label {
+    flex: 1;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.checkbox-pair label:last-child {
+    margin-right: 0;
+}
+
+/* Välj alla */
+.select-all {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.select-all label {
+    font-size: 14px;
+    color: #333;
 }
 
 /* Knapp */
@@ -71,5 +106,14 @@ form button:hover {
 
     h1 {
         font-size: 24px;
+    }
+
+    .checkbox-pair {
+        flex-direction: column;
+    }
+
+    .checkbox-pair label {
+        margin-right: 0;
+        margin-bottom: 8px;
     }
 }
