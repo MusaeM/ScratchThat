@@ -49,9 +49,9 @@ ${name}`
 
     res.status(200).json({ message: 'Mails sent successfully' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Something went wrong' });
-  }
+    console.error('ERROR:', error.response || error.message || error);
+    res.status(500).json({ message: 'Something went wrong', error: error.message });
+}
 });
 
 const PORT = process.env.PORT || 5000;
