@@ -109,7 +109,7 @@ form button:hover {
     }
 
     .checkbox-pair {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .checkbox-pair label {
