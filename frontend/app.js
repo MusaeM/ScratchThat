@@ -93,6 +93,12 @@ form.addEventListener('submit', async (e) => {
         email.style.borderColor = 'red';
         hasError = true;
     }
+	
+	// Måste välja minst en checkbox
+	if (companies.length === 0) {
+		alert('Välj minst en sajt.');
+		return;
+	}
 
     if (hasError) {
         alert('Vänligen rätta de markerade fälten.');
