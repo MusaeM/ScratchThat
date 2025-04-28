@@ -11,7 +11,8 @@
         <img src="ScratchThat.png" alt="ScratchThat Logo" class="logo">
 
         <form id="gdprForm">
-            <input type="text" id="name" placeholder="Namn" required>
+            <input type="text" id="fname" placeholder="Förnamn" required>
+			<input type="text" id="sname" placeholder="Efternamn" required>
             <input type="text" id="pnr" placeholder="Personnummer" required>
             <input type="email" id="email" placeholder="E-post" required>
 
@@ -32,6 +33,11 @@
 
             <!-- Verifiera med BankID-knapp -->
             <button type="button" id="bankidButton">Verifiera med BankID</button>
+			
+			<!-- Verifierad meddelande -->
+			<div id="verifiedMessage" style="display: none; color: green; margin-bottom: 10px;">
+				✅ Verifierad med BankID
+			</div>
 
             <!-- Skicka GDPR-begäran-knapp -->
             <button type="submit" id="submitButton" disabled>

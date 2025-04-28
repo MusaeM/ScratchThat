@@ -18,15 +18,18 @@ const loading = document.getElementById('loading');
 const thankYou = document.getElementById('thankYou');
 const bankidModal = document.getElementById('bankidModal');
 const modalText = document.getElementById('modalText');
+const verifyMessage = document.getElementById('verifiedMessage');
 
 let isVerified = false;
+
+// Från start - göm submitButton
+submitButton.style.display = 'none';
 
 // BankID verifiering
 bankidButton.addEventListener('click', () => {
     bankidModal.style.display = 'block';
-    modalText.textContent = 'Öppnar BankID...';
+    modalText.textContent = 'Verifierar BankID...';
 
-    // Starta om progressBar varje gång
     const progressBar = document.getElementById('progressBar');
     progressBar.style.width = '0%';
     progressBar.style.animation = 'loadProgress 4s linear forwards';
@@ -37,29 +40,33 @@ bankidButton.addEventListener('click', () => {
 
         setTimeout(() => {
             bankidModal.style.display = 'none';
+            bankidButton.style.display = 'none';
+            verifyMessage.style.display = 'block';
+            submitButton.style.display = 'inline-block';
             submitButton.disabled = false;
-            bankidButton.disabled = true;
-            bankidButton.innerHTML = 'Verifierad ✔️';
-            bankidButton.style.backgroundColor = '#28a745';
-            bankidButton.style.cursor = 'default';
         }, 1500);
     }, 4000);
 });
-
 
 // Formulärsubmit
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    if (!isVerified) {
+        alert('Du måste verifiera dig med BankID innan du kan skicka.');
+        return;
+    }
+
     buttonText.textContent = 'Skickar...';
     spinner.style.display = 'inline-block';
 
-    const name = document.getElementById('name').value;
+    const fname = document.getElementById('fname').value;
+    const sname = document.getElementById('sname').value;
     const pnr = document.getElementById('pnr').value;
     const email = document.getElementById('email').value;
     const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map(el => el.value);
 
-    const data = { name, pnr, email, companies };
+    const data = { fname, sname, pnr, email, companies };
 
     try {
         const response = await fetch('https://scratch-that-f9adnh625-musaems-projects.vercel.app/send-email', {
