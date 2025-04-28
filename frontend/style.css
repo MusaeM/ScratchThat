@@ -54,6 +54,11 @@ form input[type="email"] {
     background-color: #fafafa;
 }
 
+/* Röd ruta runt fel field*/
+form input {
+    transition: border-color 0.3s ease;
+}
+
 /* Checkbox sektion */
 .checkboxes {
     display: grid;

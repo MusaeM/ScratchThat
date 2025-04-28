@@ -57,39 +57,59 @@ form.addEventListener('submit', async (e) => {
         return;
     }
 
-    const fname = document.getElementById('fname').value.trim();
-    const sname = document.getElementById('sname').value.trim();
-    const pnr = document.getElementById('pnr').value.trim();
-    const email = document.getElementById('email').value.trim();
+    const fname = document.getElementById('fname');
+    const sname = document.getElementById('sname');
+    const pnr = document.getElementById('pnr');
+    const email = document.getElementById('email');
     const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map(el => el.value);
 
-    // ✅ Validering av fälten:
+    let hasError = false;
 
-    // Förnamn och Efternamn - endast bokstäver och ev. bindestreck
+    // Rensa gamla felmarkeringar
+    [fname, sname, pnr, email].forEach(input => {
+        input.style.borderColor = '#ccc';
+    });
+
+    // ✅ Validering:
+
     const nameRegex = /^[A-Za-zÅÄÖåäö-]+$/;
-    if (!nameRegex.test(fname) || !nameRegex.test(sname)) {
-        alert('Förnamn och Efternamn får endast innehålla bokstäver och bindestreck.');
-        return;
+    if (!nameRegex.test(fname.value.trim())) {
+        fname.style.borderColor = 'red';
+        hasError = true;
+    }
+    if (!nameRegex.test(sname.value.trim())) {
+        sname.style.borderColor = 'red';
+        hasError = true;
     }
 
-    // Personnummer - 6 eller 8 siffror + 4 siffror (med eller utan bindestreck)
     const pnrRegex = /^(\d{6}|\d{8})[-]?\d{4}$/;
-    if (!pnrRegex.test(pnr)) {
-        alert('Personnummer måste vara i formatet ÅÅMMDDXXXX eller ÅÅÅÅMMDD-XXXX.');
-        return;
+    if (!pnrRegex.test(pnr.value.trim())) {
+        pnr.style.borderColor = 'red';
+        hasError = true;
     }
 
-    // E-postadress
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    if (!emailRegex.test(email)) {
-        alert('Ange en giltig e-postadress.');
+    if (!emailRegex.test(email.value.trim())) {
+        email.style.borderColor = 'red';
+        hasError = true;
+    }
+
+    if (hasError) {
+        alert('Vänligen rätta de markerade fälten.');
         return;
     }
 
+    // Om ingen error, fortsätt skicka
     buttonText.textContent = 'Skickar...';
     spinner.style.display = 'inline-block';
 
-    const data = { fname, sname, pnr, email, companies };
+    const data = {
+        fname: fname.value.trim(),
+        sname: sname.value.trim(),
+        pnr: pnr.value.trim(),
+        email: email.value.trim(),
+        companies
+    };
 
     try {
         const response = await fetch('https://scratch-that-f9adnh625-musaems-projects.vercel.app/send-email', {
@@ -115,3 +135,4 @@ form.addEventListener('submit', async (e) => {
         loading.innerText = 'Något gick fel, försök igen. ❌';
     }
 });
+
