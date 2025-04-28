@@ -57,14 +57,37 @@ form.addEventListener('submit', async (e) => {
         return;
     }
 
+    const fname = document.getElementById('fname').value.trim();
+    const sname = document.getElementById('sname').value.trim();
+    const pnr = document.getElementById('pnr').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map(el => el.value);
+
+    // ✅ Validering av fälten:
+
+    // Förnamn och Efternamn - endast bokstäver och ev. bindestreck
+    const nameRegex = /^[A-Za-zÅÄÖåäö-]+$/;
+    if (!nameRegex.test(fname) || !nameRegex.test(sname)) {
+        alert('Förnamn och Efternamn får endast innehålla bokstäver och bindestreck.');
+        return;
+    }
+
+    // Personnummer - 6 eller 8 siffror + 4 siffror (med eller utan bindestreck)
+    const pnrRegex = /^(\d{6}|\d{8})[-]?\d{4}$/;
+    if (!pnrRegex.test(pnr)) {
+        alert('Personnummer måste vara i formatet ÅÅMMDDXXXX eller ÅÅÅÅMMDD-XXXX.');
+        return;
+    }
+
+    // E-postadress
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!emailRegex.test(email)) {
+        alert('Ange en giltig e-postadress.');
+        return;
+    }
+
     buttonText.textContent = 'Skickar...';
     spinner.style.display = 'inline-block';
-
-    const fname = document.getElementById('fname').value;
-    const sname = document.getElementById('sname').value;
-    const pnr = document.getElementById('pnr').value;
-    const email = document.getElementById('email').value;
-    const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map(el => el.value);
 
     const data = { fname, sname, pnr, email, companies };
 
