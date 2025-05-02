@@ -142,3 +142,17 @@ form.addEventListener('submit', async (e) => {
     }
 });
 
+// Intro-popup visas endast en gång per användare
+window.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('introPopup');
+    const closeBtn = document.getElementById('closePopup');
+
+    if (!localStorage.getItem('introSeen')) {
+        popup.style.display = 'flex';
+    }
+
+    closeBtn.addEventListener('click', () => {
+        popup.style.display = 'none';
+        localStorage.setItem('introSeen', 'true');
+    });
+});
