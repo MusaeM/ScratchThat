@@ -247,3 +247,18 @@ form button:hover {
 
 .popup-box button {
     margin-top
+}
+
+footer {
+    font-size: 14px;
+    color: #777;
+    margin-top: 40px;
+}
+footer a {
+    color: #555;
+    text-decoration: none;
+    margin: 0 8px;
+}
+footer a:hover {
+    text-decoration: underline;
+}
