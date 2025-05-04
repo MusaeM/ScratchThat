@@ -118,7 +118,7 @@ form.addEventListener('submit', async (e) => {
     };
 
     try {
-        const response = await fetch('https://scratch-that-f9adnh625-musaems-projects.vercel.app/send-email', {
+        const response = await fetch('https://scratch-that-theta.vercel.app/send-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
