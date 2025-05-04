@@ -127,6 +127,20 @@ form.addEventListener('submit', async (e) => {
         });
 
         const result = await response.json();
+        
+const fullName = `${fname.value.trim()} ${sname.value.trim()}`;
+const emailText = `Hej,
+
+Jag, ${fullName}, personnummer ${pnr.value.trim()}, begär härmed i enlighet med Artikel 17 i Dataskyddsförordningen (GDPR) att alla personuppgifter som rör mig raderas från era system, register och eventuella samarbetspartners.
+
+Jag önskar få bekräftelse på radering samt information om behandlade uppgifter, enligt Artikel 12.3 GDPR, inom en månad.
+
+Återkoppla till: ${email.value.trim()}
+
+Vänliga hälsningar,
+${fullName}`;
+
+document.getElementById('emailPreview').textContent = emailText;
 
         spinner.style.display = 'none';
         buttonText.textContent = 'Skicka GDPR Begäran';
