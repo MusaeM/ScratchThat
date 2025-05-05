@@ -26,18 +26,22 @@ app.post('/send-email', async (req, res) => {
       },
     });
 
-    const targets = {
-      /*180: 'support@180.se',
-      birthday: 'info@birthday.se',
-      eniro: 'dataskydd@eniro.com',
-      hitta: 'personuppgifter@hitta.se',
-      merinfo: 'info@merinfo.se',
-      mrkoll: 'info@mrkoll.se',
-      ratsit: 'kundservice@ratsit.se',
-      upplysning: 'support@upplysning.se'*/
-      mrkoll: 'marouf.musae@gmail.com',
-      birthday: 'marouf.musae@gmail.com',
-    };
+const targets = {
+  /*
+  180: 'support@180.se',
+  birthday: 'info@birthday.se',
+  eniro: 'dataskydd@eniro.com',
+  hitta: 'personuppgifter@hitta.se',
+  merinfo: 'info@merinfo.se',
+  mrkoll: 'info@mrkoll.se',
+  ratsit: 'kundservice@ratsit.se',
+  upplysning: 'support@upplysning.se',
+  biluppgifter: 'info@biluppgifter.se',
+  carinfo: 'info@car.info',
+  */
+  mrkoll: 'marouf.musae@gmail.com',
+  birthday: 'marouf.musae@gmail.com',
+};
 
     for (const company of companies) {
       const mailOptions = {
