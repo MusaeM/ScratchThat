@@ -39,7 +39,6 @@ app.post('/send-email', async (req, res) => {
     });
 
     const targets = {
-      /*
       180: 'support@180.se',
       birthday: 'info@birthday.se',
       eniro: 'dataskydd@eniro.com',
@@ -50,10 +49,12 @@ app.post('/send-email', async (req, res) => {
       upplysning: 'support@upplysning.se',
       biluppgifter: 'info@biluppgifter.se',
       carinfo: 'info@car.info',
-      */
+      
+      /*
       // testadresser:
       mrkoll: 'marouf.musae@gmail.com',
       birthday: 'marouf.musae@gmail.com',
+      */
     };
 
     for (const company of companies) {
