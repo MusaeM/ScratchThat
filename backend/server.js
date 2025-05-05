@@ -16,7 +16,8 @@ app.post('/send-email', async (req, res) => {
     const { fname, sname, pnr, email, companies } = req.body;
     const name = `${fname} ${sname}`.trim();
 
-    let transporter = nodemailer.createTransport({
+    // Transporter för GDPR-mail till företagen
+    const companyTransporter = nodemailer.createTransport({
       host: 'smtp.zoho.eu',
       port: 465,
       secure: true,
@@ -26,22 +27,34 @@ app.post('/send-email', async (req, res) => {
       },
     });
 
-const targets = {
-  180: 'support@180.se',
-  birthday: 'info@birthday.se',
-  eniro: 'dataskydd@eniro.com',
-  hitta: 'personuppgifter@hitta.se',
-  merinfo: 'info@merinfo.se',
-  mrkoll: 'info@mrkoll.se',
-  ratsit: 'kundservice@ratsit.se',
-  upplysning: 'support@upplysning.se',
-  biluppgifter: 'info@biluppgifter.se',
-  carinfo: 'info@car.info',
-  /*
-  mrkoll: 'marouf.musae@gmail.com',
-  birthday: 'marouf.musae@gmail.com',
-  */
-};
+    // Transporter för bekräftelsemail till användaren
+    const confirmationTransporter = nodemailer.createTransport({
+      host: 'smtp.zoho.eu',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.SMTP2_USER,
+        pass: process.env.SMTP2_PASS,
+      },
+    });
+
+    const targets = {
+      /*
+      180: 'support@180.se',
+      birthday: 'info@birthday.se',
+      eniro: 'dataskydd@eniro.com',
+      hitta: 'personuppgifter@hitta.se',
+      merinfo: 'info@merinfo.se',
+      mrkoll: 'info@mrkoll.se',
+      ratsit: 'kundservice@ratsit.se',
+      upplysning: 'support@upplysning.se',
+      biluppgifter: 'info@biluppgifter.se',
+      carinfo: 'info@car.info',
+      */
+      // testadresser:
+      mrkoll: 'marouf.musae@gmail.com',
+      birthday: 'marouf.musae@gmail.com',
+    };
 
     for (const company of companies) {
       const mailOptions = {
@@ -67,12 +80,12 @@ ${name}`,
         `
       };
 
-      await transporter.sendMail(mailOptions);
+      await companyTransporter.sendMail(mailOptions);
     }
 
-    // Skicka bekräftelsemail till användaren
+    // Bekräftelsemail till användaren
     const confirmationMail = {
-      from: process.env.SMTP_USER,
+      from: process.env.SMTP2_USER,
       to: email,
       subject: 'Din GDPR-begäran har skickats',
       text: `Hej ${name},
@@ -95,7 +108,7 @@ Tack för att du använde Scratch That!`,
       `
     };
 
-    await transporter.sendMail(confirmationMail);
+    await confirmationTransporter.sendMail(confirmationMail);
 
     res.status(200).json({ message: 'Mails sent successfully' });
 
