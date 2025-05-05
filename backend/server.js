@@ -79,7 +79,7 @@ ${companies.map(c => `- ${c}.se`).join('\n')}
 
 Du kommer att få svar direkt från dem inom cirka 30 dagar, enligt GDPR.
 
-Tack för att du använde ScratchThat!`,
+Tack för att du använde Scratch That!`,
       html: `
         <p>Hej <strong>${name}</strong>,</p>
         <p>Din begäran om radering av personuppgifter har skickats till följande tjänster:</p>
@@ -87,7 +87,7 @@ Tack för att du använde ScratchThat!`,
           ${companies.map(c => `<li>${c}.se</li>`).join('')}
         </ul>
         <p>Du kommer att få svar direkt från dem inom cirka 30 dagar, enligt GDPR.</p>
-        <p>Tack för att du använde <strong>ScratchThat</strong>!</p>
+        <p>Tack för att du använde <strong>Scratch That</strong>!</p>
       `
     };
 
