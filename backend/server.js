@@ -103,8 +103,8 @@ Tack för att du använde Scratch That!`,
         <ul>
           ${companies.map(c => `<li>${c}.se</li>`).join('')}
         </ul>
-        <p>Du kommer att få svar direkt från dem inom cirka 30 dagar, enligt GDPR.</p>
-        <p>Tack för att du använde <strong>Scratch That</strong>!</p>
+        <p>Du bör få svar direkt från dem inom cirka 30 dagar, enligt GDPR.</p>
+        <p>Tack för att du använde <a href="https://www.ScratchThat.se"><strong>Scratch That</strong></a>!</p>
       `
     };
 
