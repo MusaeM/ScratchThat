@@ -28,16 +28,15 @@ app.post('/send-email', async (req, res) => {
 
     const targets = {
       /*180: 'support@180.se',
-birthday: 'info@birthday.se',
-eniro: 'dataskydd@eniro.com',
-hitta: 'personuppgifter@hitta.se',
-merinfo: 'info@merinfo.se',
-mrkoll: 'info@mrkoll.se',
-ratsit: 'kundservice@ratsit.se',
-upplysning: 'support@upplysning.se'*/
+      birthday: 'info@birthday.se',
+      eniro: 'dataskydd@eniro.com',
+      hitta: 'personuppgifter@hitta.se',
+      merinfo: 'info@merinfo.se',
+      mrkoll: 'info@mrkoll.se',
+      ratsit: 'kundservice@ratsit.se',
+      upplysning: 'support@upplysning.se'*/
       mrkoll: 'marouf.musae@gmail.com',
       birthday: 'marouf.musae@gmail.com',
-      // Add more real addresses when ready
     };
 
     for (const company of companies) {
@@ -66,6 +65,33 @@ ${name}`,
 
       await transporter.sendMail(mailOptions);
     }
+
+    // Skicka bekräftelsemail till användaren
+    const confirmationMail = {
+      from: process.env.SMTP_USER,
+      to: email,
+      subject: 'Din GDPR-begäran har skickats',
+      text: `Hej ${name},
+
+Din begäran om radering av personuppgifter har skickats till följande tjänster:
+
+${companies.map(c => `- ${c}.se`).join('\n')}
+
+Du kommer att få svar direkt från dem inom cirka 30 dagar, enligt GDPR.
+
+Tack för att du använde ScratchThat!`,
+      html: `
+        <p>Hej <strong>${name}</strong>,</p>
+        <p>Din begäran om radering av personuppgifter har skickats till följande tjänster:</p>
+        <ul>
+          ${companies.map(c => `<li>${c}.se</li>`).join('')}
+        </ul>
+        <p>Du kommer att få svar direkt från dem inom cirka 30 dagar, enligt GDPR.</p>
+        <p>Tack för att du använde <strong>ScratchThat</strong>!</p>
+      `
+    };
+
+    await transporter.sendMail(confirmationMail);
 
     res.status(200).json({ message: 'Mails sent successfully' });
 
