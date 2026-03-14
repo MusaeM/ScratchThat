@@ -91,6 +91,16 @@
                             </label>
                         </div>
 
+                        <div id="extraFieldsPanel" class="content-card compact" style="display: none;">
+                            <div class="section-row">
+                                <div>
+                                    <p class="eyebrow">Kompletteringar</p>
+                                    <h3>Vi behöver lite mer för vissa sajter</h3>
+                                </div>
+                            </div>
+                            <div id="extraFields" class="field-grid"></div>
+                        </div>
+
                         <div class="content-card compact">
                             <div class="section-row">
                                 <div>
@@ -111,6 +121,16 @@
                                 <label><input type="checkbox" name="companies" value="biluppgifter"> Biluppgifter.se</label>
                                 <label><input type="checkbox" name="companies" value="carinfo"> Car.info</label>
                             </div>
+                        </div>
+
+                        <div id="workflowOverview" class="content-card compact" style="display: none;">
+                            <div class="section-row">
+                                <div>
+                                    <p class="eyebrow">Automationsplan</p>
+                                    <h3>Så här hanteras dina val</h3>
+                                </div>
+                            </div>
+                            <div id="workflowSummary" class="workflow-summary"></div>
                         </div>
 
                         <div class="content-card compact">
@@ -136,8 +156,9 @@
                     <div id="thankYou" class="content-card" style="display: none;">
                         <p class="eyebrow">Klart</p>
                         <h2>Ditt ärende är skickat</h2>
-                        <p>Ett bekräftelsemail ska ha skickats till din e-postadress. Nedan ser du texten som skickades till de valda sajterna.</p>
-                        <pre id="emailPreview" class="email-preview"></pre>
+                        <p id="resultIntro">Här ser du vad som automatiserades direkt och vad som eventuellt kräver ett steg från användaren.</p>
+                        <div id="resultSummary" class="workflow-summary"></div>
+                        <pre id="emailPreview" class="email-preview" style="display: none;"></pre>
                         <div class="cta-row">
                             <a href="dashboard.html" class="button button-primary">Se dashboard</a>
                             <a href="start.html" class="button button-secondary">Starta nytt ärende</a>

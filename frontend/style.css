@@ -638,6 +638,43 @@ li {
     gap: 1rem;
 }
 
+.workflow-summary {
+    display: grid;
+    gap: 1rem;
+}
+
+.summary-block {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.summary-item {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.68);
+}
+
+.summary-item h4 {
+    margin-bottom: 0.35rem;
+}
+
+.summary-item-auto {
+    background: rgba(20, 92, 76, 0.08);
+}
+
+.summary-item-input {
+    background: rgba(244, 186, 87, 0.16);
+}
+
+.summary-item-action {
+    background: rgba(184, 79, 47, 0.08);
+}
+
+.summary-item-limited {
+    background: rgba(60, 54, 43, 0.08);
+}
+
 .field-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

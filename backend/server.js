@@ -3,128 +3,209 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
 
+const { getPublicServices, getServiceByKey } = require('./services');
+const {
+  buildWorkflowPlan,
+  buildEmailPayload,
+  buildConfirmationMessage,
+  getFullName
+} = require('./automation');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+function createTransporter({ userEnvKey, passEnvKey }) {
+  const user = process.env[userEnvKey];
+  const pass = process.env[passEnvKey];
+
+  if (!user || !pass) {
+    return null;
+  }
+
+  return nodemailer.createTransport({
+    host: 'smtp.zoho.eu',
+    port: 465,
+    secure: true,
+    auth: {
+      user,
+      pass
+    }
+  });
+}
+
+function resolveRecipient(service) {
+  return process.env.TARGET_OVERRIDE_EMAIL || service.recipient;
+}
+
+function normalizeProfile(body = {}) {
+  return {
+    fname: String(body.fname || '').trim(),
+    sname: String(body.sname || '').trim(),
+    pnr: String(body.pnr || '').trim(),
+    email: String(body.email || '').trim(),
+    phone: String(body.phone || '').trim(),
+    plan: String(body.plan || 'bas').trim().toLowerCase()
+  };
+}
+
+function validateProfile(profile) {
+  const issues = [];
+  const nameRegex = /^[\p{L}-]+$/u;
+  const pnrRegex = /^(\d{6}|\d{8})[-]?\d{4}$/;
+  const emailRegex = /^[\w.-]+@([\w-]+\.)+[\w-]{2,}$/;
+
+  if (!nameRegex.test(profile.fname)) {
+    issues.push('fname');
+  }
+  if (!nameRegex.test(profile.sname)) {
+    issues.push('sname');
+  }
+  if (!pnrRegex.test(profile.pnr)) {
+    issues.push('pnr');
+  }
+  if (!emailRegex.test(profile.email)) {
+    issues.push('email');
+  }
+
+  return issues;
+}
+
 app.get('/', (req, res) => {
-  res.send('ScratchThat Backend running 🚀');
+  res.send('ScratchThat Backend running');
 });
 
-app.post('/send-email', async (req, res) => {
+app.get('/services', (req, res) => {
+  res.json({ services: getPublicServices() });
+});
+
+app.post('/workflow-plan', (req, res) => {
+  const profile = normalizeProfile(req.body);
+  const companies = Array.isArray(req.body.companies) ? req.body.companies : [];
+  const validationIssues = validateProfile({
+    ...profile,
+    fname: profile.fname || 'Placeholder',
+    sname: profile.sname || 'Placeholder',
+    pnr: profile.pnr || '19000101-0000',
+    email: profile.email || 'placeholder@example.com'
+  }).filter((field) => {
+    if (field === 'fname') {
+      return profile.fname !== '';
+    }
+    if (field === 'sname') {
+      return profile.sname !== '';
+    }
+    if (field === 'pnr') {
+      return profile.pnr !== '';
+    }
+    if (field === 'email') {
+      return profile.email !== '';
+    }
+    return false;
+  });
+
+  const plan = buildWorkflowPlan({ profile, companies });
+
+  res.json({
+    ...plan,
+    validationIssues
+  });
+});
+
+app.post(['/execute-workflow', '/send-email'], async (req, res) => {
   try {
-    const { fname, sname, pnr, email, companies } = req.body;
-    const name = `${fname} ${sname}`.trim();
+    const profile = normalizeProfile(req.body);
+    const companies = Array.isArray(req.body.companies) ? req.body.companies : [];
+    const validationIssues = validateProfile(profile);
 
-    // Transporter för GDPR-mail till företagen
-    const companyTransporter = nodemailer.createTransport({
-      host: 'smtp.zoho.eu',
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    // Transporter för bekräftelsemail till användaren
-    const confirmationTransporter = nodemailer.createTransport({
-      host: 'smtp.zoho.eu',
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.SMTP2_USER,
-        pass: process.env.SMTP2_PASS,
-      },
-    });
-
-    const targets = {
-      /*
-      180: 'support@180.se',
-      birthday: 'info@birthday.se',
-      eniro: 'dataskydd@eniro.com',
-      hitta: 'personuppgifter@hitta.se',
-      merinfo: 'info@merinfo.se',
-      mrkoll: 'info@mrkoll.se',
-      ratsit: 'kundservice@ratsit.se',
-      upplysning: 'support@upplysning.se',
-      biluppgifter: 'info@biluppgifter.se',
-      carinfo: 'info@car.info',
-      */
-      
-    
-      // testadresser:
-      180: 'marouf.musae@gmail.com',
-      birthday: 'marouf.musae@gmail.com',
-      eniro: 'marouf.musae@gmail.com',
-      hitta: 'marouf.musae@gmail.com',
-      merinfo: 'marouf.musae@gmail.com',
-      mrkoll: 'marouf.musae@gmail.com',
-      ratsit: 'marouf.musae@gmail.com',
-      upplysning: 'marouf.musae@gmail.com',
-      biluppgifter: 'marouf.musae@gmail.com',
-      carinfo: 'marouf.musae@gmail.com',
-    };
-
-    for (const company of companies) {
-      const mailOptions = {
-        from: process.env.SMTP_USER,
-        to: targets[company],
-        subject: 'Begäran om radering av personuppgifter enligt GDPR (Artikel 17)',
-        text: `Hej,
-
-Jag, ${name}, personnummer ${pnr}, begär härmed i enlighet med Artikel 17 i Dataskyddsförordningen (GDPR) att alla personuppgifter som rör mig raderas från era system, register och eventuella samarbetspartners.
-
-Jag önskar få bekräftelse på radering samt information om behandlade uppgifter, enligt Artikel 12.3 GDPR, inom en månad.
-
-Återkoppla till: ${email}
-
-Vänliga hälsningar,
-${name}`,
-        html: `
-          <p>Hej,</p>
-          <p>Jag, <strong>${name}</strong>, personnummer <strong>${pnr}</strong>, begär härmed i enlighet med <strong>Artikel 17</strong> i Dataskyddsförordningen (GDPR) att alla personuppgifter som rör mig raderas från era system, register och eventuella samarbetspartners.</p>
-          <p>Jag önskar få bekräftelse på radering samt information om behandlade uppgifter, enligt <strong>Artikel 12.3 GDPR</strong>, inom en månad.</p>
-          <p>För eventuell återkoppling kan ni nå mig på: <a href="mailto:${email}">${email}</a></p>
-          <p>Vänliga hälsningar,<br>${name}</p>
-        `
-      };
-
-      await companyTransporter.sendMail(mailOptions);
+    if (validationIssues.length > 0) {
+      return res.status(400).json({
+        message: 'Validation failed',
+        validationIssues
+      });
     }
 
-    // Bekräftelsemail till användaren
-    const confirmationMail = {
-      from: process.env.SMTP2_USER,
-      to: email,
-      subject: 'Din GDPR-begäran har skickats',
-      text: `Hej ${name},
+    if (companies.length === 0) {
+      return res.status(400).json({
+        message: 'At least one service must be selected'
+      });
+    }
 
-Din begäran om radering av personuppgifter har skickats till följande tjänster:
-
-${companies.map(c => `- ${c}.se`).join('\n')}
-
-Du kommer att få svar direkt från dem inom cirka 30 dagar, enligt GDPR.
-
-Tack för att du använde Scratch That!`,
-      html: `
-        <p>Hej <strong>${name}</strong>,</p>
-        <p>Din begäran om radering av personuppgifter har skickats till följande tjänster:</p>
-        <ul>
-          ${companies.map(c => `<li>${c}.se</li>`).join('')}
-        </ul>
-        <p>Du bör få svar direkt från dem inom cirka 30 dagar, enligt GDPR.</p>
-        <p>Tack för att du använde <a href="https://www.ScratchThat.se"><strong>Scratch That</strong></a>!</p>
-      `
+    const workflowPlan = buildWorkflowPlan({ profile, companies });
+    const automatableItems = workflowPlan.services.filter((item) => item.status === 'automatable');
+    const result = {
+      plan: profile.plan,
+      fullName: getFullName(profile),
+      automated: [],
+      userAction: workflowPlan.services.filter((item) => item.status === 'user_action'),
+      needsInput: workflowPlan.services.filter((item) => item.status === 'needs_input'),
+      limited: workflowPlan.services.filter((item) => item.status === 'limited'),
+      confirmationSent: false,
+      previewText: null
     };
 
-    await confirmationTransporter.sendMail(confirmationMail);
+    const companyTransporter = createTransporter({
+      userEnvKey: 'SMTP_USER',
+      passEnvKey: 'SMTP_PASS'
+    });
 
-    res.status(200).json({ message: 'Mails sent successfully' });
+    if (automatableItems.length > 0 && !companyTransporter) {
+      return res.status(500).json({
+        message: 'SMTP credentials are missing for automated email flows'
+      });
+    }
 
+    for (const item of automatableItems) {
+      const service = getServiceByKey(item.key);
+      const payload = buildEmailPayload(service, profile);
+      const recipient = resolveRecipient(service);
+
+      await companyTransporter.sendMail({
+        from: process.env.SMTP_USER,
+        to: recipient,
+        subject: payload.subject,
+        text: payload.text,
+        html: payload.html
+      });
+
+      result.automated.push({
+        key: item.key,
+        label: item.label,
+        recipient: recipient
+      });
+
+      if (!result.previewText) {
+        result.previewText = payload.text;
+      }
+    }
+
+    const confirmationTransporter = createTransporter({
+      userEnvKey: 'SMTP2_USER',
+      passEnvKey: 'SMTP2_PASS'
+    });
+
+    if (confirmationTransporter) {
+      const confirmation = buildConfirmationMessage({ profile, result });
+      await confirmationTransporter.sendMail({
+        from: process.env.SMTP2_USER,
+        to: profile.email,
+        subject: confirmation.subject,
+        text: confirmation.text,
+        html: confirmation.html
+      });
+      result.confirmationSent = true;
+    }
+
+    res.status(200).json({
+      message: 'Workflow executed successfully',
+      workflow: result
+    });
   } catch (error) {
     console.error('ERROR:', error.response || error.message || error);
-    res.status(500).json({ message: 'Something went wrong', error: error.message });
+    res.status(500).json({
+      message: 'Something went wrong',
+      error: error.message
+    });
   }
 });
 
