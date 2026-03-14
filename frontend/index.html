@@ -4,109 +4,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.png" type="image/png">
-
-    <meta property="og:title" content="Scratch That - Radera dina uppgifter online" />
-    <meta property="og:description" content="Begär radering av dina personuppgifter från svenska söktjänster – automatiserat och enkelt." />
-    <meta property="og:image" content="https://www.scratchthat.se/images/metalogo.jpg" />
-    <meta property="og:url" content="https://scratchthat.se" />
-    <link rel="canonical" href="https://scratchthat.se">    
-
+    <meta property="og:title" content="Scratch That - Minska din synlighet online">
+    <meta property="og:description" content="En tjänst som hjälper dig ta rätt steg för att få bort, begränsa eller dölja personuppgifter på svenska söktjänster.">
+    <meta property="og:image" content="https://scratchthat.se/metalogo.jpg">
+    <meta property="og:url" content="https://scratchthat.se">
+    <link rel="canonical" href="https://scratchthat.se">
     <title>Scratch That</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-      <a href="index.html">
-        <img src="ScratchThat.png" alt="ScratchThat Logo" class="logo">
-        </a>
+    <header class="site-header">
+        <div class="shell nav-row">
+            <a href="index.html" class="brand">
+                <img src="ScratchThat.png" alt="Scratch That" class="brand-mark">
+                <span>Scratch That</span>
+            </a>
+            <nav class="site-nav">
+                <a href="how-it-works.html">Sa fungerar det</a>
+                <a href="prices.html">Priser</a>
+                <a href="free.html">Gratisverktyg</a>
+                <a href="faq.html">FAQ</a>
+                <a href="start.html" class="nav-cta">Starta arende</a>
+            </nav>
+        </div>
+    </header>
 
-        <form id="gdprForm">
-            <input type="text" id="fname" placeholder="Förnamn" required>
-			<input type="text" id="sname" placeholder="Efternamn" required>
-            <input type="text" id="pnr" placeholder="Personnummer" required>
-            <input type="email" id="email" placeholder="E-post" required>
-
-            <div class="checkboxes">
-                <label><input type="checkbox" name="companies" value="180"> 180.se</label>
-                <label><input type="checkbox" name="companies" value="birthday"> Birthday.se</label>
-                <label><input type="checkbox" name="companies" value="eniro"> Eniro.se</label>
-                <label><input type="checkbox" name="companies" value="hitta"> Hitta.se</label>
-                <label><input type="checkbox" name="companies" value="merinfo"> Merinfo.se</label>
-                <label><input type="checkbox" name="companies" value="mrkoll"> Mrkoll.se</label>
-                <label><input type="checkbox" name="companies" value="ratsit"> Ratsit.se</label>
-                <label><input type="checkbox" name="companies" value="upplysning"> Upplysning.se</label>
-                <label><input type="checkbox" name="companies" value="biluppgifter"> Biluppgifter.se</label><label><input type="checkbox" name="companies" value="carinfo"> Car.info</label>
+    <main>
+        <section class="hero">
+            <div class="shell hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Integritet for vanliga svenskar</p>
+                    <h1>Minska din synlighet pa svenska soktjanster</h1>
+                    <p class="lead">Vi hjalper dig ta ratt steg for att fa bort, begransa eller dolja personuppgifter dar det faktiskt ar mojligt. Automatisera det som gar, fa guidning dar det behovs, och slipp gora allt sjalv.</p>
+                    <div class="cta-row">
+                        <a href="prices.html" class="button button-primary">Valj paket</a>
+                        <a href="how-it-works.html" class="button button-secondary">Sa fungerar det</a>
+                    </div>
+                    <p class="micro-copy">Reklamfritt i betalversionerna. Tydlig process. Inga overdrivna loften.</p>
+                </div>
+                <div class="hero-panel">
+                    <div class="stat-card">
+                        <p class="stat-label">Byggt for verkligheten</p>
+                        <h2>Ratt atgard for ratt sajt</h2>
+                        <ul class="check-list">
+                            <li>Automatisera dar det ar mojligt</li>
+                            <li>Guida vid BankID eller sarskilda krav</li>
+                            <li>Folj upp nar svaren borjar komma in</li>
+                        </ul>
+                    </div>
+                    <div class="mini-grid">
+                        <article class="mini-card">
+                            <p class="mini-title">Gratis</p>
+                            <p>Gor det sjalv med vagledning och sponsrat innehall.</p>
+                        </article>
+                        <article class="mini-card emphasis">
+                            <p class="mini-title">Bas</p>
+                            <p>For dig som vill spara tid och slippa reklamen.</p>
+                        </article>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="select-all">
-                <label><input type="checkbox" id="selectAll"> Välj alla</label>
+        <section class="section">
+            <div class="shell section-heading">
+                <p class="eyebrow">Problemet</p>
+                <h2>Det ska inte vara svart att skydda sin digitala integritet</h2>
+                <p>Manga svenska soktjanster visar personuppgifter fran olika kallor och anvander olika regler for borttagning. Vissa har sjalvservice, vissa kraver sarskilda uppgifter, och andra hansvisar till grundlagsskydd eller egna processer.</p>
             </div>
+            <div class="shell feature-grid">
+                <article class="feature-card">
+                    <h3>Splittrade processer</h3>
+                    <p>Varje tjanst fungerar olika. Ett standardmail racker sallan for alla.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Mycket handpaleggning</h3>
+                    <p>Du behover ofta komplettera med BankID, telefonnummer eller andra uppgifter.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Otydliga svar</h3>
+                    <p>Nar sajter nekar ar det svart att veta vad nasta steg egentligen borde vara.</p>
+                </article>
+            </div>
+        </section>
 
-            <!-- Verifiera med BankID-knapp -->
-            <button type="button" id="bankidButton">Verifiera med BankID</button>
-			
-			<!-- Verifierad meddelande -->
-			<div id="verifiedMessage" style="display: none; color: green; margin-bottom: 10px;">
-				✅ Verifierad med BankID
-			</div>
+        <section class="section section-alt">
+            <div class="shell section-heading">
+                <p class="eyebrow">Losningen</p>
+                <h2>En samlad vag genom en splittrad process</h2>
+                <p>Scratch That hjalper dig forsta vad som faktiskt gar att gora, och anvander ratt atgard for ratt sajt. Dar det gar automatiserar vi processen. Dar det kravs manuell handling guidar vi dig vidare med tydliga instruktioner och nasta steg.</p>
+            </div>
+            <div class="shell steps-grid">
+                <article class="step-card">
+                    <span class="step-number">1</span>
+                    <h3>Vi kartlagger ratt vag</h3>
+                    <p>Olika sajter kraver olika atgarder. Vi matchar ditt arende med ratt process for varje tjanst.</p>
+                </article>
+                <article class="step-card">
+                    <span class="step-number">2</span>
+                    <h3>Vi automatiserar dar det gar</h3>
+                    <p>Nar en sajt accepterar formular, mail eller andra standardfloden hjalper vi dig genomfora det snabbt och strukturerat.</p>
+                </article>
+                <article class="step-card">
+                    <span class="step-number">3</span>
+                    <h3>Vi visar nasta steg</h3>
+                    <p>Om en tjanst kraver BankID, extra uppgifter eller egen sjalvservice far du tydlig guidning i stallet for ett generiskt standardsvar.</p>
+                </article>
+            </div>
+        </section>
 
-            <!-- Skicka GDPR-begäran-knapp -->
-            <button type="submit" id="submitButton" disabled>
-                <span id="buttonText">Skicka GDPR Begäran</span>
-                <div id="spinner" style="display: none;"></div>
-            </button>
-        </form>
+        <section class="section">
+            <div class="shell section-heading">
+                <p class="eyebrow">Paket</p>
+                <h2>Valj hur mycket hjalp du vill ha</h2>
+                <p>Borja med ratt niva for dig. Du kan alltid uppgradera senare.</p>
+            </div>
+            <div class="shell pricing-grid">
+                <article class="pricing-card">
+                    <p class="plan-name">Gratis</p>
+                    <h3>Kom igang sjalv</h3>
+                    <p class="price-line">0 kr</p>
+                    <ul class="plan-list">
+                        <li>Grundlaggande vagledning</li>
+                        <li>Utvalda lankar till sjalvservice</li>
+                        <li>Enklare mallar och instruktioner</li>
+                        <li>Sponsrat innehall kan visas</li>
+                    </ul>
+                    <a href="free.html" class="button button-secondary">Testa gratis</a>
+                </article>
+                <article class="pricing-card featured">
+                    <p class="plan-badge">Mest vald</p>
+                    <p class="plan-name">Bas</p>
+                    <h3>For de flesta</h3>
+                    <p class="price-line">199 kr</p>
+                    <ul class="plan-list">
+                        <li>Tjanstspecifik atgardsplan</li>
+                        <li>Automation dar det ar mojligt</li>
+                        <li>Guidning dar komplettering kravs</li>
+                        <li>Reklamfri upplevelse</li>
+                    </ul>
+                    <a href="start.html?plan=bas" class="button button-primary">Kom igang med Bas</a>
+                </article>
+                <article class="pricing-card">
+                    <p class="plan-name">Premium</p>
+                    <h3>Maximal hjalp och uppfoljning</h3>
+                    <p class="price-line">499 kr</p>
+                    <ul class="plan-list">
+                        <li>Allt i Bas</li>
+                        <li>Fler uppfoljningar</li>
+                        <li>Stod vid avslag</li>
+                        <li>Prioriterad hantering</li>
+                    </ul>
+                    <a href="start.html?plan=premium" class="button button-secondary">Valj Premium</a>
+                </article>
+            </div>
+        </section>
 
-        <div id="loading" style="display: none;">Skickar... 🔄</div>
-        
-       <div id="thankYou" class="text-page" style="display: none;">
-  <h2>Tack! Ditt ärende är inskickat. 📬</h2>
-  <br>
-  <p>Ett bekräftelse-mail har skickats till din mailadress. Glöm inte att även titta i din skräppost om du inte hittar den!
-  </p>
-  
-  <br>
-  <p>Följande meddelande skickades till de valda sajterna:</p>
-  <pre id="emailPreview" style="background: #f4f4f4; padding: 1rem; white-space: pre-wrap;"></pre>
-</div>
-        
-        <footer style="margin-top: 40px; text-align: center;">
-  <a href="Pages/About.html">Om oss</a> |
-  <a href="Pages/Privacy.html">Integritet</a> |
-  <a href="Pages/Terms.html">Villkor</a>
-</footer>
+        <section class="section section-alt">
+            <div class="shell quote-panel">
+                <div>
+                    <p class="eyebrow">Trovardighet</p>
+                    <h2>Vi lovar inte det som ingen kan lova</h2>
+                </div>
+                <p>Alla uppgifter gar inte att ta bort fran alla sajter. Vissa tjanster omfattas av sarskilda regler eller hansvisar till egna borttagningsfloden. Darfor bygger vi tjansten pa verkliga processer, tydliga forvantningar och ratt atgard for ratt situation.</p>
+            </div>
+        </section>
 
-        <!-- Modal för BankID -->
-        <div id="bankidModal" class="modal">
-            <div class="modal-content">
-                <div class="spinner-modal"></div>
-				<div class="progress-container">
-					<div id="progressBar"></div>
-				</div>
-                <p id="modalText">Öppnar BankID...</p>
+        <section class="section">
+            <div class="shell cta-banner">
+                <div>
+                    <p class="eyebrow">Kom igang</p>
+                    <h2>Ta forsta steget mot mindre synlighet online</h2>
+                    <p>Valj det paket som passar dig bast och kom igang i dag.</p>
+                </div>
+                <div class="cta-row">
+                    <a href="prices.html" class="button button-primary">Se priser</a>
+                    <a href="free.html" class="button button-secondary">Testa gratis</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell footer-grid">
+            <div>
+                <a href="index.html" class="brand footer-brand">
+                    <img src="ScratchThat.png" alt="Scratch That" class="brand-mark">
+                    <span>Scratch That</span>
+                </a>
+                <p class="footer-copy">En tjanst for dig som vill minska din synlighet pa svenska soktjanster med tydligare struktur och mindre handpaleggning.</p>
+            </div>
+            <div class="footer-links">
+                <a href="how-it-works.html">Sa fungerar det</a>
+                <a href="prices.html">Priser</a>
+                <a href="free.html">Gratisverktyg</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="footer-links">
+                <a href="Pages/About.html">Om oss</a>
+                <a href="Pages/Privacy.html">Integritet</a>
+                <a href="Pages/Terms.html">Villkor</a>
+                <a href="start.html">Starta arende</a>
             </div>
         </div>
-
-    </div>
-    
-<div id="introPopup" class="popup-overlay">
-  <div class="popup-box">
-  <h2>Scratch That</h2>
-  <div class="text-page">
-<p>
-  Den här tjänsten hjälper dig att begära radering av dina personuppgifter från flera svenska söktjänster – automatiskt och enkelt.
-</p>
-<br>
-<ul style="text-align: left;">
-  <li>✔ Enkel att använda</li>
-  <li>✔ Verifiering med BankID</li>
-  <li>✔ Färdigformulerade GDPR-förfrågningar</li>
-</ul>
-</div>
-<button id="closePopup">Jag förstår</button>
-  </div>
-</div>
-
-<script src="app.js"></script>
+    </footer>
 </body>
 </html>

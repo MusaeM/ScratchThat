@@ -1,14 +1,5 @@
-// "Välj alla" funktion
 const selectAll = document.getElementById('selectAll');
 const checkboxes = document.querySelectorAll('input[name="companies"]');
-
-selectAll.addEventListener('change', function () {
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = this.checked;
-    });
-});
-
-// Form och element
 const form = document.getElementById('gdprForm');
 const bankidButton = document.getElementById('bankidButton');
 const submitButton = document.getElementById('submitButton');
@@ -19,154 +10,217 @@ const thankYou = document.getElementById('thankYou');
 const bankidModal = document.getElementById('bankidModal');
 const modalText = document.getElementById('modalText');
 const verifyMessage = document.getElementById('verifiedMessage');
+const selectedPlanInput = document.getElementById('selectedPlan');
+const selectedPlanLabel = document.getElementById('selectedPlanLabel');
+const selectedPlanPrice = document.getElementById('selectedPlanPrice');
+const planButtons = document.querySelectorAll('.plan-option');
+const faqButtons = document.querySelectorAll('.faq-question');
 
 let isVerified = false;
 
-// Från start - göm submitButton
-submitButton.style.display = 'none';
+if (faqButtons.length > 0) {
+    faqButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            button.parentElement.classList.toggle('is-open');
+        });
+    });
+}
 
-// BankID verifiering
-bankidButton.addEventListener('click', () => {
-    bankidModal.style.display = 'block';
-    modalText.textContent = 'Verifierar BankID...';
+if (selectAll && checkboxes.length > 0) {
+    selectAll.addEventListener('change', function () {
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = this.checked;
+        });
+    });
+}
 
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.width = '0%';
-    progressBar.style.animation = 'loadProgress 4s linear forwards';
-
-    setTimeout(() => {
-        isVerified = true;
-        modalText.textContent = 'Verifiering lyckades ✅';
-
-        setTimeout(() => {
-            bankidModal.style.display = 'none';
-            bankidButton.style.display = 'none';
-            verifyMessage.style.display = 'block';
-            submitButton.style.display = 'inline-block';
-            submitButton.disabled = false;
-        }, 1500);
-    }, 4000);
-});
-
-// Formulärsubmit
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (!isVerified) {
-        alert('Du måste verifiera dig med BankID innan du kan skicka.');
+function applyPlanSelection(plan, price) {
+    if (!selectedPlanInput || !selectedPlanLabel || !selectedPlanPrice) {
         return;
     }
 
-    const fname = document.getElementById('fname');
-    const sname = document.getElementById('sname');
-    const pnr = document.getElementById('pnr');
-    const email = document.getElementById('email');
-    const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map(el => el.value);
+    selectedPlanInput.value = plan;
+    selectedPlanLabel.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+    selectedPlanPrice.textContent = `${price} kr`;
 
-    let hasError = false;
+    planButtons.forEach((button) => {
+        const isSelected = button.dataset.plan === plan;
+        button.classList.toggle('is-selected', isSelected);
+    });
+}
 
-    // Rensa gamla felmarkeringar
-    [fname, sname, pnr, email].forEach(input => {
-        input.style.borderColor = '#ccc';
+if (planButtons.length > 0) {
+    planButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            applyPlanSelection(button.dataset.plan, button.dataset.price);
+        });
     });
 
-    // ✅ Validering:
+    const params = new URLSearchParams(window.location.search);
+    const requestedPlan = params.get('plan');
+    const matchedPlan = Array.from(planButtons).find((button) => button.dataset.plan === requestedPlan);
 
-    const nameRegex = /^[A-Za-zÅÄÖåäö-]+$/;
-    if (!nameRegex.test(fname.value.trim())) {
-        fname.style.borderColor = 'red';
-        hasError = true;
+    if (matchedPlan) {
+        applyPlanSelection(matchedPlan.dataset.plan, matchedPlan.dataset.price);
     }
-    if (!nameRegex.test(sname.value.trim())) {
-        sname.style.borderColor = 'red';
-        hasError = true;
-    }
+}
 
-    const pnrRegex = /^(\d{6}|\d{8})[-]?\d{4}$/;
-    if (!pnrRegex.test(pnr.value.trim())) {
-        pnr.style.borderColor = 'red';
-        hasError = true;
-    }
+if (submitButton) {
+    submitButton.disabled = true;
+}
 
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    if (!emailRegex.test(email.value.trim())) {
-        email.style.borderColor = 'red';
-        hasError = true;
-    }
-	
-	// Måste välja minst en checkbox
-	if (companies.length === 0) {
-		alert('Välj minst en sajt.');
-		return;
-	}
+if (bankidButton && bankidModal && modalText && verifyMessage && submitButton) {
+    bankidButton.addEventListener('click', () => {
+        bankidModal.style.display = 'block';
+        modalText.textContent = 'Verifierar BankID-placeholder...';
 
-    if (hasError) {
-        alert('Vänligen rätta de markerade fälten.');
-        return;
-    }
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.style.width = '0%';
+            progressBar.style.animation = 'loadProgress 4s linear forwards';
+        }
 
-    // Om ingen error, fortsätt skicka
-    buttonText.textContent = 'Skickar...';
-    spinner.style.display = 'inline-block';
+        window.setTimeout(() => {
+            isVerified = true;
+            modalText.textContent = 'Verifiering lyckades';
 
-    const data = {
-        fname: fname.value.trim(),
-        sname: sname.value.trim(),
-        pnr: pnr.value.trim(),
-        email: email.value.trim(),
-        companies
-    };
+            window.setTimeout(() => {
+                bankidModal.style.display = 'none';
+                bankidButton.style.display = 'none';
+                verifyMessage.style.display = 'block';
+                submitButton.disabled = false;
+            }, 1200);
+        }, 4000);
+    });
+}
 
-    try {
-        const response = await fetch('https://scratch-that-theta.vercel.app/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
+if (form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!isVerified) {
+            window.alert('Du maste verifiera dig med BankID-placeholder innan du kan skicka.');
+            return;
+        }
+
+        const fname = document.getElementById('fname');
+        const sname = document.getElementById('sname');
+        const pnr = document.getElementById('pnr');
+        const email = document.getElementById('email');
+        const companies = Array.from(document.querySelectorAll('input[name="companies"]:checked')).map((el) => el.value);
+
+        let hasError = false;
+
+        [fname, sname, pnr, email].forEach((input) => {
+            input.style.borderColor = 'rgba(59, 43, 21, 0.12)';
         });
 
-        const result = await response.json();
-        
-const fullName = `${fname.value.trim()} ${sname.value.trim()}`;
-const emailText = `Hej,
+        const nameRegex = /^[\p{L}-]+$/u;
+        if (!nameRegex.test(fname.value.trim())) {
+            fname.style.borderColor = '#c23f1f';
+            hasError = true;
+        }
+        if (!nameRegex.test(sname.value.trim())) {
+            sname.style.borderColor = '#c23f1f';
+            hasError = true;
+        }
 
-Jag, ${fullName}, personnummer ${pnr.value.trim()}, begär härmed i enlighet med Artikel 17 i Dataskyddsförordningen (GDPR) att alla personuppgifter som rör mig raderas från era system, register och eventuella samarbetspartners.
+        const pnrRegex = /^(\d{6}|\d{8})[-]?\d{4}$/;
+        if (!pnrRegex.test(pnr.value.trim())) {
+            pnr.style.borderColor = '#c23f1f';
+            hasError = true;
+        }
 
-Jag önskar få bekräftelse på radering samt information om behandlade uppgifter, enligt Artikel 12.3 GDPR, inom en månad.
+        const emailRegex = /^[\w.-]+@([\w-]+\.)+[\w-]{2,}$/;
+        if (!emailRegex.test(email.value.trim())) {
+            email.style.borderColor = '#c23f1f';
+            hasError = true;
+        }
 
-Återkoppla till: ${email.value.trim()}
+        if (companies.length === 0) {
+            window.alert('Valj minst en sajt.');
+            return;
+        }
 
-Vänliga hälsningar,
+        if (hasError) {
+            window.alert('Ratta de markerade falten.');
+            return;
+        }
+
+        if (buttonText) {
+            buttonText.textContent = 'Skickar...';
+        }
+        if (spinner) {
+            spinner.style.display = 'inline-block';
+        }
+        if (loading) {
+            loading.style.display = 'block';
+        }
+
+        const data = {
+            fname: fname.value.trim(),
+            sname: sname.value.trim(),
+            pnr: pnr.value.trim(),
+            email: email.value.trim(),
+            companies,
+            plan: selectedPlanInput ? selectedPlanInput.value : 'bas'
+        };
+
+        try {
+            const response = await fetch('https://scratch-that-theta.vercel.app/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            await response.json();
+
+            const fullName = `${fname.value.trim()} ${sname.value.trim()}`;
+            const emailText = `Hej,
+
+Jag, ${fullName}, personnummer ${pnr.value.trim()}, begar harmed i enlighet med Artikel 17 i Dataskyddsforordningen (GDPR) att alla personuppgifter som ror mig raderas fran era system, register och eventuella samarbetspartners.
+
+Jag onskar fa bekraftelse pa radering samt information om behandlade uppgifter, enligt Artikel 12.3 GDPR, inom en manad.
+
+Arendet skickades via Scratch That-planen: ${selectedPlanInput ? selectedPlanInput.value : 'bas'}
+Atterkoppla till: ${email.value.trim()}
+
+Vanliga halsningar,
 ${fullName}`;
 
-document.getElementById('emailPreview').textContent = emailText;
+            const emailPreview = document.getElementById('emailPreview');
+            if (emailPreview) {
+                emailPreview.textContent = emailText;
+            }
 
-        spinner.style.display = 'none';
-        buttonText.textContent = 'Skicka GDPR Begäran';
-        loading.style.display = 'none';
-        form.style.display = 'none';
-        thankYou.style.display = 'block';
-        isVerified = false;
-    } catch (error) {
-        console.error('Error:', error);
-        spinner.style.display = 'none';
-        buttonText.textContent = 'Skicka GDPR Begäran';
-        loading.innerText = 'Något gick fel, försök igen. ❌';
-    }
-});
-
-// Intro-popup visas endast en gång per användare
-window.addEventListener('DOMContentLoaded', () => {
-    const popup = document.getElementById('introPopup');
-    const closeBtn = document.getElementById('closePopup');
-
-    if (!localStorage.getItem('introSeen')) {
-        popup.style.display = 'flex';
-    }
-
-    closeBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-        localStorage.setItem('introSeen', 'true');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+            if (buttonText) {
+                buttonText.textContent = 'Skicka GDPR-begaran';
+            }
+            if (loading) {
+                loading.style.display = 'none';
+            }
+            form.style.display = 'none';
+            if (thankYou) {
+                thankYou.style.display = 'block';
+            }
+            isVerified = false;
+        } catch (error) {
+            console.error('Error:', error);
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+            if (buttonText) {
+                buttonText.textContent = 'Skicka GDPR-begaran';
+            }
+            if (loading) {
+                loading.textContent = 'Nagot gick fel, forsok igen.';
+                loading.style.display = 'block';
+            }
+        }
     });
-});
+}

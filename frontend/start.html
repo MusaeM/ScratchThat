@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <title>Starta arende - Scratch That</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="shell nav-row">
+            <a href="index.html" class="brand">
+                <img src="ScratchThat.png" alt="Scratch That" class="brand-mark">
+                <span>Scratch That</span>
+            </a>
+            <nav class="site-nav">
+                <a href="how-it-works.html">Sa fungerar det</a>
+                <a href="prices.html">Priser</a>
+                <a href="free.html">Gratisverktyg</a>
+                <a href="faq.html">FAQ</a>
+                <a href="start.html" class="nav-cta active">Starta arende</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <section class="page-hero shell">
+            <p class="eyebrow">Starta arende</p>
+            <h1>Bygg ditt integritetsarende</h1>
+            <p class="lead narrow">Valj paket, fyll i dina uppgifter och markera vilka sajter du vill hantera. BankID och Swish ar placeholders tills riktig integration ar pa plats.</p>
+        </section>
+
+        <section class="section">
+            <div class="shell start-layout">
+                <aside class="summary-card">
+                    <p class="eyebrow">Steg 1</p>
+                    <h2>Valj paket</h2>
+                    <div class="plan-picker">
+                        <button type="button" class="plan-option is-selected" data-plan="bas" data-price="199">Bas <span>199 kr</span></button>
+                        <button type="button" class="plan-option" data-plan="premium" data-price="499">Premium <span>499 kr</span></button>
+                        <button type="button" class="plan-option" data-plan="gratis" data-price="0">Gratis <span>0 kr</span></button>
+                    </div>
+                    <div class="placeholder-card">
+                        <p class="eyebrow">Steg 2</p>
+                        <h3>Betalning</h3>
+                        <p>Swish-checkout kommer senare. Just nu visar vi bara hur flodet kommer att se ut.</p>
+                        <a href="checkout.html" class="text-link">Se checkout-placeholder</a>
+                    </div>
+                    <div class="placeholder-card">
+                        <p class="eyebrow">Steg 3</p>
+                        <h3>Verifikation</h3>
+                        <p>BankID ar fortfarande en UI-process och ersatter inte riktig verifiering an.</p>
+                    </div>
+                </aside>
+
+                <section class="form-card">
+                    <div class="selection-banner">
+                        <div>
+                            <p class="eyebrow">Vald plan</p>
+                            <h2 id="selectedPlanLabel">Bas</h2>
+                        </div>
+                        <p class="selected-price" id="selectedPlanPrice">199 kr</p>
+                    </div>
+
+                    <form id="gdprForm" class="application-form">
+                        <input type="hidden" id="selectedPlan" value="bas">
+
+                        <div class="field-grid">
+                            <label>
+                                <span>Fornamn</span>
+                                <input type="text" id="fname" placeholder="Fornamn" required>
+                            </label>
+                            <label>
+                                <span>Efternamn</span>
+                                <input type="text" id="sname" placeholder="Efternamn" required>
+                            </label>
+                        </div>
+
+                        <div class="field-grid">
+                            <label>
+                                <span>Personnummer</span>
+                                <input type="text" id="pnr" placeholder="YYYYMMDD-XXXX" required>
+                            </label>
+                            <label>
+                                <span>E-post</span>
+                                <input type="email" id="email" placeholder="namn@email.se" required>
+                            </label>
+                        </div>
+
+                        <div class="content-card compact">
+                            <div class="section-row">
+                                <div>
+                                    <p class="eyebrow">Val av sajter</p>
+                                    <h3>Vilka vill du hantera?</h3>
+                                </div>
+                                <label class="inline-check"><input type="checkbox" id="selectAll"> Valj alla</label>
+                            </div>
+                            <div class="checkboxes">
+                                <label><input type="checkbox" name="companies" value="180"> 180.se</label>
+                                <label><input type="checkbox" name="companies" value="birthday"> Birthday.se</label>
+                                <label><input type="checkbox" name="companies" value="eniro"> Eniro.se</label>
+                                <label><input type="checkbox" name="companies" value="hitta"> Hitta.se</label>
+                                <label><input type="checkbox" name="companies" value="merinfo"> Merinfo.se</label>
+                                <label><input type="checkbox" name="companies" value="mrkoll"> Mrkoll.se</label>
+                                <label><input type="checkbox" name="companies" value="ratsit"> Ratsit.se</label>
+                                <label><input type="checkbox" name="companies" value="upplysning"> Upplysning.se</label>
+                                <label><input type="checkbox" name="companies" value="biluppgifter"> Biluppgifter.se</label>
+                                <label><input type="checkbox" name="companies" value="carinfo"> Car.info</label>
+                            </div>
+                        </div>
+
+                        <div class="content-card compact">
+                            <div class="section-row">
+                                <div>
+                                    <p class="eyebrow">Verifiering</p>
+                                    <h3>BankID-placeholder</h3>
+                                </div>
+                            </div>
+                            <p class="muted-copy">Detta ar en simulering av framtida verifieringssteg. Riktig BankID-integration kommer senare.</p>
+                            <button type="button" id="bankidButton" class="button button-secondary full-width">Verifiera med BankID</button>
+                            <div id="verifiedMessage" class="verified-banner" style="display: none;">Verifierad med BankID-placeholder</div>
+                        </div>
+
+                        <button type="submit" id="submitButton" class="button button-primary full-width" disabled>
+                            <span id="buttonText">Skicka GDPR-begaran</span>
+                            <span id="spinner" style="display: none;"></span>
+                        </button>
+
+                        <div id="loading" class="status-line" style="display: none;">Skickar...</div>
+                    </form>
+
+                    <div id="thankYou" class="content-card" style="display: none;">
+                        <p class="eyebrow">Klart</p>
+                        <h2>Ditt arende ar skickat</h2>
+                        <p>Ett bekraftelsemail ska ha skickats till din e-postadress. Nedan ser du texten som skickades till de valda sajterna.</p>
+                        <pre id="emailPreview" class="email-preview"></pre>
+                        <div class="cta-row">
+                            <a href="dashboard.html" class="button button-primary">Se dashboard</a>
+                            <a href="start.html" class="button button-secondary">Starta nytt arende</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <div id="bankidModal" class="modal">
+            <div class="modal-card">
+                <div class="spinner-modal"></div>
+                <div class="progress-container">
+                    <div id="progressBar"></div>
+                </div>
+                <p id="modalText">Startar BankID-placeholder...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell footer-grid">
+            <div>
+                <a href="index.html" class="brand footer-brand">
+                    <img src="ScratchThat.png" alt="Scratch That" class="brand-mark">
+                    <span>Scratch That</span>
+                </a>
+            </div>
+            <div class="footer-links">
+                <a href="prices.html">Priser</a>
+                <a href="free.html">Gratisverktyg</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+            <div class="footer-links">
+                <a href="Pages/About.html">Om oss</a>
+                <a href="Pages/Privacy.html">Integritet</a>
+                <a href="Pages/Terms.html">Villkor</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
