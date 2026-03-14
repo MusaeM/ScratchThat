@@ -1,4 +1,5 @@
 const { getServiceByKey } = require('./services');
+const crypto = require('crypto');
 
 function getFullName(profile) {
   return `${profile.fname || ''} ${profile.sname || ''}`.trim();
