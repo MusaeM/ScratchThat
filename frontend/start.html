@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="favicon.png" type="image/png">
-    <title>Starta arende - Scratch That</title>
+    <title>Starta ärende - Scratch That</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,27 +15,27 @@
                 <span>Scratch That</span>
             </a>
             <nav class="site-nav">
-                <a href="how-it-works.html">Sa fungerar det</a>
+                <a href="how-it-works.html">Så fungerar det</a>
                 <a href="prices.html">Priser</a>
                 <a href="free.html">Gratisverktyg</a>
                 <a href="faq.html">FAQ</a>
-                <a href="start.html" class="nav-cta active">Starta arende</a>
+                <a href="start.html" class="nav-cta active">Starta ärende</a>
             </nav>
         </div>
     </header>
 
     <main class="page-main">
         <section class="page-hero shell">
-            <p class="eyebrow">Starta arende</p>
-            <h1>Bygg ditt integritetsarende</h1>
-            <p class="lead narrow">Valj paket, fyll i dina uppgifter och markera vilka sajter du vill hantera. BankID och Swish ar placeholders tills riktig integration ar pa plats.</p>
+            <p class="eyebrow">Starta ärende</p>
+            <h1>Bygg ditt integritetsärende</h1>
+            <p class="lead narrow">Välj paket, fyll i dina uppgifter och markera vilka sajter du vill hantera. BankID och Swish är placeholders tills riktig integration är på plats.</p>
         </section>
 
         <section class="section">
             <div class="shell start-layout">
                 <aside class="summary-card">
                     <p class="eyebrow">Steg 1</p>
-                    <h2>Valj paket</h2>
+                    <h2>Välj paket</h2>
                     <div class="plan-picker">
                         <button type="button" class="plan-option is-selected" data-plan="bas" data-price="199">Bas <span>199 kr</span></button>
                         <button type="button" class="plan-option" data-plan="premium" data-price="499">Premium <span>499 kr</span></button>
@@ -44,13 +44,13 @@
                     <div class="placeholder-card">
                         <p class="eyebrow">Steg 2</p>
                         <h3>Betalning</h3>
-                        <p>Swish-checkout kommer senare. Just nu visar vi bara hur flodet kommer att se ut.</p>
+                        <p>Swish-checkout kommer senare. Just nu visar vi bara hur flödet kommer att se ut.</p>
                         <a href="checkout.html" class="text-link">Se checkout-placeholder</a>
                     </div>
                     <div class="placeholder-card">
                         <p class="eyebrow">Steg 3</p>
-                        <h3>Verifikation</h3>
-                        <p>BankID ar fortfarande en UI-process och ersatter inte riktig verifiering an.</p>
+                        <h3>Verifiering</h3>
+                        <p>BankID är fortfarande en UI-process och ersätter inte riktig verifiering än.</p>
                     </div>
                 </aside>
 
@@ -68,8 +68,8 @@
 
                         <div class="field-grid">
                             <label>
-                                <span>Fornamn</span>
-                                <input type="text" id="fname" placeholder="Fornamn" required>
+                                <span>Förnamn</span>
+                                <input type="text" id="fname" placeholder="Förnamn" required>
                             </label>
                             <label>
                                 <span>Efternamn</span>
@@ -94,7 +94,7 @@
                                     <p class="eyebrow">Val av sajter</p>
                                     <h3>Vilka vill du hantera?</h3>
                                 </div>
-                                <label class="inline-check"><input type="checkbox" id="selectAll"> Valj alla</label>
+                                <label class="inline-check"><input type="checkbox" id="selectAll"> Välj alla</label>
                             </div>
                             <div class="checkboxes">
                                 <label><input type="checkbox" name="companies" value="180"> 180.se</label>
@@ -117,13 +117,13 @@
                                     <h3>BankID-placeholder</h3>
                                 </div>
                             </div>
-                            <p class="muted-copy">Detta ar en simulering av framtida verifieringssteg. Riktig BankID-integration kommer senare.</p>
+                            <p class="muted-copy">Detta är en simulering av framtida verifieringssteg. Riktig BankID-integration kommer senare.</p>
                             <button type="button" id="bankidButton" class="button button-secondary full-width">Verifiera med BankID</button>
                             <div id="verifiedMessage" class="verified-banner" style="display: none;">Verifierad med BankID-placeholder</div>
                         </div>
 
                         <button type="submit" id="submitButton" class="button button-primary full-width" disabled>
-                            <span id="buttonText">Skicka GDPR-begaran</span>
+                            <span id="buttonText">Skicka GDPR-begäran</span>
                             <span id="spinner" style="display: none;"></span>
                         </button>
 
@@ -132,12 +132,12 @@
 
                     <div id="thankYou" class="content-card" style="display: none;">
                         <p class="eyebrow">Klart</p>
-                        <h2>Ditt arende ar skickat</h2>
-                        <p>Ett bekraftelsemail ska ha skickats till din e-postadress. Nedan ser du texten som skickades till de valda sajterna.</p>
+                        <h2>Ditt ärende är skickat</h2>
+                        <p>Ett bekräftelsemail ska ha skickats till din e-postadress. Nedan ser du texten som skickades till de valda sajterna.</p>
                         <pre id="emailPreview" class="email-preview"></pre>
                         <div class="cta-row">
                             <a href="dashboard.html" class="button button-primary">Se dashboard</a>
-                            <a href="start.html" class="button button-secondary">Starta nytt arende</a>
+                            <a href="start.html" class="button button-secondary">Starta nytt ärende</a>
                         </div>
                     </div>
                 </section>

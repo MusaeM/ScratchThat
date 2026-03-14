@@ -99,7 +99,7 @@ if (form) {
         e.preventDefault();
 
         if (!isVerified) {
-            window.alert('Du maste verifiera dig med BankID-placeholder innan du kan skicka.');
+            window.alert('Du måste verifiera dig med BankID-placeholder innan du kan skicka.');
             return;
         }
 
@@ -138,7 +138,7 @@ if (form) {
         }
 
         if (companies.length === 0) {
-            window.alert('Valj minst en sajt.');
+            window.alert('Välj minst en sajt.');
             return;
         }
 
@@ -180,14 +180,14 @@ if (form) {
             const fullName = `${fname.value.trim()} ${sname.value.trim()}`;
             const emailText = `Hej,
 
-Jag, ${fullName}, personnummer ${pnr.value.trim()}, begar harmed i enlighet med Artikel 17 i Dataskyddsforordningen (GDPR) att alla personuppgifter som ror mig raderas fran era system, register och eventuella samarbetspartners.
+Jag, ${fullName}, personnummer ${pnr.value.trim()}, begär härmed i enlighet med Artikel 17 i Dataskyddsförordningen (GDPR) att alla personuppgifter som rör mig raderas från era system, register och eventuella samarbetspartners.
 
-Jag onskar fa bekraftelse pa radering samt information om behandlade uppgifter, enligt Artikel 12.3 GDPR, inom en manad.
+Jag önskar få bekräftelse på radering samt information om behandlade uppgifter, enligt Artikel 12.3 GDPR, inom en månad.
 
-Arendet skickades via Scratch That-planen: ${selectedPlanInput ? selectedPlanInput.value : 'bas'}
-Atterkoppla till: ${email.value.trim()}
+Ärendet skickades via Scratch That-planen: ${selectedPlanInput ? selectedPlanInput.value : 'bas'}
+Återkoppla till: ${email.value.trim()}
 
-Vanliga halsningar,
+Vänliga hälsningar,
 ${fullName}`;
 
             const emailPreview = document.getElementById('emailPreview');
@@ -199,7 +199,7 @@ ${fullName}`;
                 spinner.style.display = 'none';
             }
             if (buttonText) {
-                buttonText.textContent = 'Skicka GDPR-begaran';
+                buttonText.textContent = 'Skicka GDPR-begäran';
             }
             if (loading) {
                 loading.style.display = 'none';
@@ -215,10 +215,10 @@ ${fullName}`;
                 spinner.style.display = 'none';
             }
             if (buttonText) {
-                buttonText.textContent = 'Skicka GDPR-begaran';
+                buttonText.textContent = 'Skicka GDPR-begäran';
             }
             if (loading) {
-                loading.textContent = 'Nagot gick fel, forsok igen.';
+                loading.textContent = 'Något gick fel, försök igen.';
                 loading.style.display = 'block';
             }
         }
