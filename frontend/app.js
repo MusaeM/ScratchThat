@@ -15,8 +15,17 @@ const selectedPlanLabel = document.getElementById('selectedPlanLabel');
 const selectedPlanPrice = document.getElementById('selectedPlanPrice');
 const planButtons = document.querySelectorAll('.plan-option');
 const faqButtons = document.querySelectorAll('.faq-question');
+const navToggle = document.querySelector('.nav-toggle');
+const siteNav = document.querySelector('.site-nav');
 
 let isVerified = false;
+
+if (navToggle && siteNav) {
+    navToggle.addEventListener('click', () => {
+        const isOpen = siteNav.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+}
 
 if (faqButtons.length > 0) {
     faqButtons.forEach((button) => {
@@ -41,7 +50,7 @@ function applyPlanSelection(plan, price) {
 
     selectedPlanInput.value = plan;
     selectedPlanLabel.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
-    selectedPlanPrice.textContent = `${price} kr`;
+    selectedPlanPrice.textContent = String(price).includes('kr') ? price : `${price} kr`;
 
     planButtons.forEach((button) => {
         const isSelected = button.dataset.plan === plan;
